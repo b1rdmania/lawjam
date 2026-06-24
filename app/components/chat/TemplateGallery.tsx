@@ -14,7 +14,7 @@ export function TemplateGallery(sendMessage?: {
   return (
     <div id="template-gallery" className="w-full max-w-3xl mx-auto mt-2">
       <p className="text-center text-sm text-bolt-elements-textSecondary mb-4">
-        Start from a template — pick one, then change anything in plain English.
+        Pick a design — then describe your legal content into it.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {LAWJAM_TEMPLATES.map((t) => (
@@ -25,7 +25,7 @@ export function TemplateGallery(sendMessage?: {
           >
             <div className="flex items-center justify-between">
               <span className={`${t.icon} text-2xl text-accent-600`} />
-              <span className="text-[11px] text-bolt-elements-textSecondary">{t.jurisdiction}</span>
+              <span className="text-[11px] text-bolt-elements-textSecondary">{t.tag}</span>
             </div>
             <div className="lj-serif text-base font-medium text-bolt-elements-textPrimary leading-snug mt-1">{t.name}</div>
             <div className="text-xs text-bolt-elements-textSecondary leading-relaxed">{t.blurb}</div>

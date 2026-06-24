@@ -1,77 +1,77 @@
 /**
- * LawJam template gallery — the on-ramp.
+ * LawJam templates — DESIGN templates, not legal-task ideas.
  *
- * A confused, time-poor lawyer can't spec a tool from a blank prompt — that's
- * the exact skill they lack. So LawJam leads with templates: pick a working
- * legal tool, then customise it in plain English. Each card seeds a rich prompt
- * that names the relevant skill and grounding, so the build comes out good.
+ * Like Word/PowerPoint: you pick a LAYOUT (a proven, good-looking design), then
+ * describe your legal content into it. This removes two kinds of blank-canvas
+ * load at once — what should it look like, and how should it be structured —
+ * and leaves the lawyer only the part they know: the legal content.
  *
- * Add a template: append an entry. Keep the set tight and credible — these are
- * the proof gallery and the first thing a lawyer (and a partner like Antoine) sees.
+ * Each layout maps to a Mobbin-referenced UI pattern (see DESIGN.md P1–P4) and
+ * its seed prompt builds the design as a working shell, then asks what it's for.
  */
 
 export interface LawJamTemplate {
   id: string;
   name: string;
-  jurisdiction: string; // emoji + short label
+  tag: string; // what this design is good for
   blurb: string; // one line on the card
   icon: string; // iconify (phosphor) class
-  prompt: string; // the seed prompt sent on click
+  prompt: string; // seed: build the layout, then ask for the legal content
 }
 
 export const LAWJAM_TEMPLATES: LawJamTemplate[] = [
   {
-    id: 'tenancy-checker',
-    name: 'Tenancy Agreement Checker',
-    jurisdiction: '🇬🇧 Housing',
-    blurb: 'Flag clauses that breach UK housing law.',
-    icon: 'i-ph:house-line',
-    prompt:
-      'Build a tenancy-agreement checker as a runnable web app. The user pastes a residential tenancy agreement; the tool checks each clause against UK housing law (Housing Act 1988, Tenant Fees Act 2019, Protection from Eviction Act 1977, and unfair terms under the Consumer Rights Act 2015) and returns a clear results table — clause, pass/fail, the provision it engages. Ground every legal reference via the UK law tool; mark anything uncertain for a solicitor to verify. Clean, credible UI; assistive tool, not legal advice.',
-  },
-  {
-    id: 'lba-drafter',
-    name: 'Letter Before Action',
-    jurisdiction: '🇬🇧 Litigation',
-    blurb: 'Draft a pre-action letter on the right protocol.',
-    icon: 'i-ph:envelope-simple',
-    prompt:
-      'Build a letter-before-action drafter for England & Wales as a runnable web app, following the cpr-letter-drafter skill. From a short intake, pick the correct pre-action protocol (debt, professional negligence, housing disrepair, personal injury, or the default Practice Direction on Pre-Action Conduct), draft the letter, and surface the limitation deadline as something for a solicitor to confirm — never asserted. Form in, finished letter out.',
-  },
-  {
-    id: 'nda-review',
-    name: 'NDA Review',
-    jurisdiction: '🤝 Commercial',
-    blurb: 'Review an NDA from your side, flag the issues.',
-    icon: 'i-ph:file-text',
-    prompt:
-      'Build an NDA review tool as a runnable web app. The user pastes a one-way NDA and picks their side (recipient or discloser); the tool returns an issues log with the problem terms and a suggested redline position for each, following the nda-triage / contract-review method. Clean results UI; flag anything that needs a lawyer’s eye.',
-  },
-  {
-    id: 'wp-settlement',
-    name: 'Settlement Letter',
-    jurisdiction: '🇬🇧 Disputes',
-    blurb: 'Draft a WP / Calderbank offer on the right footing.',
-    icon: 'i-ph:handshake',
-    prompt:
-      'Build a settlement-letter drafter as a runnable web app, following the without-prejudice-drafter skill. Pick the correct footing (without prejudice, WP save as to costs / Calderbank, or open), draft the letter, and warn the user where marking it "without prejudice" won’t actually keep it out of court (the Unilever v Procter & Gamble exceptions). Form in, letter out.',
-  },
-  {
-    id: 'intake-triage',
-    name: 'Client Intake Triage',
-    jurisdiction: '📋 Front door',
-    blurb: 'Triage an enquiry — urgency, matter type, next step.',
+    id: 'form',
+    name: 'Form & intake',
+    tag: 'Intake · screeners · questionnaires',
+    blurb: 'A clean sectioned form that collects answers and returns a structured result.',
     icon: 'i-ph:clipboard-text',
     prompt:
-      'Build a client-intake triage tool as a runnable web app. A prospective client answers a short set of plain-English questions; the tool classifies the matter type, flags urgency and any limitation/deadline risk, and recommends a next step — storing each submission in a simple dashboard the firm can review. Clear, reassuring UI; make plain it is an assistive triage aid, not legal advice.',
+      'Build a multi-step intake/questionnaire tool, designed to the LawJam house style: a clean sectioned form that collects answers, validates them, and produces a clear structured result or summary at the end. Use sensible placeholder questions for now — then ask me what this form is for and what questions and outcomes it should have.',
   },
   {
-    id: 'disclosure-checklist',
-    name: 'Disclosure Checklist',
-    jurisdiction: '🇬🇧 Litigation',
-    blurb: 'Work out what must be disclosed (PD 57AD / CPR 31).',
+    id: 'document',
+    name: 'Document drafter',
+    tag: 'Letters · notices · agreements',
+    blurb: 'A form that turns inputs into a finished, properly formatted legal document.',
+    icon: 'i-ph:envelope-simple',
+    prompt:
+      'Build a document-drafter tool, designed to the LawJam house style: a clean input form on the left and a live, properly formatted legal-document preview on the right that updates as fields are filled, with copy / print / export. Use a placeholder letter for now — then ask me what document it should draft and what fields and clauses it needs.',
+  },
+  {
+    id: 'checker',
+    name: 'Document checker',
+    tag: 'Review · compliance · risk',
+    blurb: 'Paste a document, get flagged issues with severity and the rule each engages.',
+    icon: 'i-ph:file-magnifying-glass',
+    prompt:
+      'Build a document-checker tool, designed to the LawJam house style and following our results pattern: the user pastes a document; it returns a summary header with counts, then a list of flagged issues — each with a severity badge (oxblood for a flag, grey for minor), the point, and the provision it engages, expandable for detail — plus a summary banner. Use placeholder checks for now — then ask me what kind of document it checks and against what rules.',
+  },
+  {
+    id: 'checklist',
+    name: 'Checklist & tracker',
+    tag: 'Procedure · due diligence',
+    blurb: 'A structured checklist that works out what applies and tracks completion.',
     icon: 'i-ph:list-checks',
     prompt:
-      'Build a disclosure checklist tool as a runnable web app, following the disclosure-list skill. From the case details, pick the regime (PD 57AD Disclosure Pilot with its Models A–E, or standard disclosure under CPR Part 31), choose a model per issue, and produce the structured list plus the disclosure certificate for the party to sign. Ground references in the rules; mark anything to confirm.',
+      'Build a checklist / tracker tool, designed to the LawJam house style: from a few inputs it works out which items apply, presents a structured checklist grouped by section, tracks completion, and can export the list. Use placeholder items for now — then ask me what process this checklist is for and what determines which items apply.',
+  },
+  {
+    id: 'dashboard',
+    name: 'Submissions dashboard',
+    tag: 'Triage · matter tracking',
+    blurb: 'Collect entries and review them in a clean table dashboard.',
+    icon: 'i-ph:squares-four',
+    prompt:
+      'Build a submissions dashboard tool, designed to the LawJam house style: a simple intake that feeds a clean dashboard — summary count cards at the top, then a filterable table of entries with status, each expandable to detail. Store entries in browser storage. Use placeholder data for now — then ask me what is being collected and how entries should be classified.',
+  },
+  {
+    id: 'comparison',
+    name: 'Comparison',
+    tag: 'Vs playbook · A / B',
+    blurb: 'Compare a document against another or a standard, and show the differences.',
+    icon: 'i-ph:rows',
+    prompt:
+      'Build a comparison tool, designed to the LawJam house style: two inputs (a document and a standard or playbook), a side-by-side view highlighting where they differ, each difference explained with a short position note. Use placeholder content for now — then ask me what is being compared and against what standard.',
   },
 ];

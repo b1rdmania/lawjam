@@ -14,8 +14,8 @@ export const meta: MetaFunction = () => [
 const STEPS = [
   {
     n: '1',
-    title: 'Pick a template',
-    body: 'Start from a working legal tool — the way you start a document in Word. No blank box, no spec to write.',
+    title: 'Pick a design',
+    body: 'Choose a layout — a form, a document, a checklist — the way you pick a template in Word. No blank box, no spec to write.',
   },
   {
     n: '2',
@@ -72,8 +72,8 @@ export default function Landing() {
 
       {/* What you can build */}
       <section className="py-16">
-        <H className="mb-3">Start from a template</H>
-        <p className="text-[#52525B] mb-8 max-w-2xl">Working tools, ready to make yours — then change anything in plain English.</p>
+        <H className="mb-3">Start from a design</H>
+        <p className="text-[#52525B] mb-8 max-w-2xl">Pick a proven layout, then describe your legal content into it — and change anything in plain English.</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {LAWJAM_TEMPLATES.map((t) => (
             <a
@@ -83,7 +83,7 @@ export default function Landing() {
             >
               <div className="flex items-center justify-between">
                 <span className={`${t.icon} text-2xl text-accent-700`} />
-                <span className="text-[11px] text-[#71717A]">{t.jurisdiction}</span>
+                <span className="text-[11px] text-[#71717A]">{t.tag}</span>
               </div>
               <div className="text-base font-medium mt-1">{t.name}</div>
               <div className="text-xs text-[#71717A] leading-relaxed">{t.blurb}</div>
