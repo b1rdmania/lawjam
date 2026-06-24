@@ -16,14 +16,14 @@ const NAV = [
 
 export function PublicLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-full bg-[#FAF8F4] text-[#1A1A1A] font-[Hanken_Grotesk,ui-sans-serif,system-ui]">
-      <header className="sticky top-0 z-10 bg-[#FAF8F4]/85 backdrop-blur border-b border-black/5">
+    <div className="min-h-full bg-[#FCFCFB] text-[#1A1A1A] font-[Hanken_Grotesk,ui-sans-serif,system-ui]">
+      <header className="sticky top-0 z-10 bg-[#FCFCFB]/85 backdrop-blur border-b border-black/5">
         <div className="mx-auto max-w-5xl px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="lj-serif text-2xl tracking-tight">
+          <Link to="/" className="text-2xl tracking-tight">
             <span>Law</span>
             <span className="text-accent-700">Jam</span>
           </Link>
-          <nav className="hidden sm:flex items-center gap-7 text-sm text-[#4A4A48]">
+          <nav className="hidden sm:flex items-center gap-7 text-sm text-[#52525B]">
             {NAV.map((n) => (
               <a key={n.label} href={n.href} className="hover:text-[#1A1A1A] transition-colors">
                 {n.label}
@@ -31,7 +31,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="flex items-center gap-3">
-            <Link to="/app" className="text-sm text-[#4A4A48] hover:text-[#1A1A1A]">
+            <Link to="/app" className="text-sm text-[#52525B] hover:text-[#1A1A1A]">
               Sign in
             </Link>
             <Link
@@ -47,8 +47,8 @@ export function PublicLayout({ children }: { children: ReactNode }) {
       <main className="mx-auto max-w-5xl px-6">{children}</main>
 
       <footer className="mt-24 border-t border-black/5">
-        <div className="mx-auto max-w-5xl px-6 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm text-[#6B6B68]">
-          <div className="lj-serif text-lg text-[#1A1A1A]">
+        <div className="mx-auto max-w-5xl px-6 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm text-[#71717A]">
+          <div className="text-lg text-[#1A1A1A]">
             Law<span className="text-accent-700">Jam</span>
           </div>
           <nav className="flex flex-wrap items-center gap-6">
@@ -64,7 +64,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
   );
 }
 
-/** Serif section heading, oxblood-restrained. */
+/** Section heading — Sana-style: clean sans, light weight, large, tight tracking. */
 export function H({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <h2 className={`lj-serif text-3xl sm:text-4xl tracking-tight leading-tight ${className}`}>{children}</h2>;
+  return <h2 className={`text-3xl sm:text-4xl font-normal tracking-tight leading-tight ${className}`}>{children}</h2>;
 }

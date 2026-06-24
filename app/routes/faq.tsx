@@ -42,20 +42,20 @@ export default function FAQ() {
     <PublicLayout>
       <section className="pt-20 pb-8 max-w-3xl">
         <p className="text-sm text-accent-700 mb-4">FAQ</p>
-        <h1 className="lj-serif text-4xl sm:text-5xl leading-tight tracking-tight">Questions, answered plainly.</h1>
+        <h1 className="text-4xl sm:text-5xl leading-tight tracking-tight">Questions, answered plainly.</h1>
       </section>
 
       <section className="pb-16 max-w-3xl divide-y divide-black/5">
         {FAQS.map((f) => (
           <div key={f.q} className="py-7">
-            <h3 className="lj-serif text-xl mb-3">{f.q}</h3>
-            <p className="text-[#4A4A48] leading-relaxed">{f.a}</p>
+            <h3 className="text-xl mb-3">{f.q}</h3>
+            <p className="text-[#52525B] leading-relaxed">{f.a}</p>
           </div>
         ))}
       </section>
 
       <section className="pb-20 max-w-3xl">
-        <p className="text-[#4A4A48] mb-4">Still wondering something?</p>
+        <p className="text-[#52525B] mb-4">Still wondering something?</p>
         <a
           href="/app"
           className="inline-block rounded-full bg-accent-700 hover:bg-accent-800 text-white px-6 py-3 transition-colors"

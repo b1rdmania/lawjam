@@ -18,16 +18,16 @@ export default function Signup() {
     <PublicLayout>
       <section className="pt-20 pb-20 max-w-xl">
         <p className="text-sm text-accent-700 mb-4">Early access</p>
-        <h1 className="lj-serif text-4xl sm:text-5xl leading-tight tracking-tight mb-4">Start building.</h1>
-        <p className="text-lg text-[#4A4A48] leading-relaxed mb-10">
+        <h1 className="text-4xl sm:text-5xl leading-tight tracking-tight mb-4">Start building.</h1>
+        <p className="text-lg text-[#52525B] leading-relaxed mb-10">
           Tell us a little about your work and we’ll get you in. No code, grounded in real law, your first tool in
           minutes.
         </p>
 
         {submitted ? (
-          <div className="rounded-2xl bg-[#F5F3F0] p-8">
-            <h2 className="lj-serif text-2xl mb-2">You’re on the list.</h2>
-            <p className="text-[#4A4A48]">
+          <div className="rounded-2xl bg-[#F4F4F3] p-8">
+            <h2 className="text-2xl mb-2">You’re on the list.</h2>
+            <p className="text-[#52525B]">
               We’ll be in touch shortly. In the meantime, you can open the builder and try a template.
             </p>
             <a
@@ -39,7 +39,7 @@ export default function Signup() {
           </div>
         ) : (
           <form
-            className="rounded-2xl bg-[#F5F3F0] p-8 flex flex-col gap-4"
+            className="rounded-2xl bg-[#F4F4F3] p-8 flex flex-col gap-4"
             onSubmit={(e) => {
               e.preventDefault();
               setSubmitted(true);
