@@ -56,7 +56,7 @@ export default function About() {
       <section className="py-16 max-w-3xl">
         <H>Build a legal tool. Just describe it.</H>
         <a
-          href="/signup"
+          href="/app"
           className="inline-block mt-6 rounded-full bg-accent-700 hover:bg-accent-800 text-white px-6 py-3 transition-colors"
         >
           Start building

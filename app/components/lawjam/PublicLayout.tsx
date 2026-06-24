@@ -31,11 +31,11 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="flex items-center gap-3">
-            <Link to="/" className="text-sm text-[#4A4A48] hover:text-[#1A1A1A]">
+            <Link to="/app" className="text-sm text-[#4A4A48] hover:text-[#1A1A1A]">
               Sign in
             </Link>
             <Link
-              to="/signup"
+              to="/app"
               className="text-sm rounded-full bg-accent-700 hover:bg-accent-800 text-white px-4 py-2 transition-colors"
             >
               Start building
@@ -55,7 +55,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             <Link to="/about" className="hover:text-[#1A1A1A]">About</Link>
             <Link to="/faq" className="hover:text-[#1A1A1A]">FAQ</Link>
             <Link to="/signup" className="hover:text-[#1A1A1A]">Sign up</Link>
-            <Link to="/" className="hover:text-[#1A1A1A]">Open the builder</Link>
+            <Link to="/app" className="hover:text-[#1A1A1A]">Open the builder</Link>
           </nav>
           <div>Build a legal tool. Just describe it.</div>
         </div>

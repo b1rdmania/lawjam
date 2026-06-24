@@ -57,7 +57,7 @@ export default function FAQ() {
       <section className="pb-20 max-w-3xl">
         <p className="text-[#4A4A48] mb-4">Still wondering something?</p>
         <a
-          href="/signup"
+          href="/app"
           className="inline-block rounded-full bg-accent-700 hover:bg-accent-800 text-white px-6 py-3 transition-colors"
         >
           Start building — see for yourself
