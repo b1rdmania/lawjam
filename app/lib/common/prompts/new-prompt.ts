@@ -28,7 +28,7 @@ The year is 2026.
 
   <legal_batteries>
     LawJam ships pre-wired legal capabilities. Prefer these over re-inventing them:
-    - CASE LAW: a case-law retrieval client (CourtListener-style) for real citations. Use it whenever a tool needs to reference authority. See \`app/lib/lawjam/caselaw.ts\`.
+    - UK LAW (live): a Lex tool (UK Government / legislation.gov.uk) is connected over MCP, covering all UK legislation and court judgments. When a tool references a UK statute, regulation, or case, GROUND it by calling this tool — cite the real, current provision rather than relying on memory. If it returns nothing, mark the reference for the user to verify; never fabricate a citation. (US case law: \`app/lib/lawjam/caselaw.ts\`, CourtListener.)
     - SKILLS: reusable, practitioner-authored UK legal skills — see <legal_skills> below.
     - These are available both while you build (to ground yourself) and at run-time (the generated app can call them).
   </legal_batteries>

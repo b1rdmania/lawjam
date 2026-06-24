@@ -9,10 +9,20 @@ type MCPSettings = {
   maxLLMSteps: number;
 };
 
+// LawJam Tier-1 grounding: the UK Government's Lex API (i.AI) over MCP — all UK
+// legislation + court judgments from legislation.gov.uk, Open Government Licence,
+// open access, no API key. Makes generated tools cite real UK law, not memory.
+const DEFAULT_MCP_SERVERS = {
+  lex: {
+    type: 'streamable-http' as const,
+    url: 'https://lex.lab.i.ai.gov.uk/mcp',
+  },
+};
+
 const defaultSettings = {
   maxLLMSteps: 5,
   mcpConfig: {
-    mcpServers: {},
+    mcpServers: { ...DEFAULT_MCP_SERVERS },
   },
 } satisfies MCPSettings;
 
@@ -47,6 +57,8 @@ export const useMCPStore = create<Store & Actions>((set, get) => ({
       if (savedConfig) {
         try {
           const settings = JSON.parse(savedConfig) as MCPSettings;
+          // Ensure LawJam default servers (Lex UK law) are present even for pre-existing configs.
+          settings.mcpConfig.mcpServers = { ...DEFAULT_MCP_SERVERS, ...settings.mcpConfig.mcpServers };
           const serverTools = await updateServerConfig(settings.mcpConfig);
           set(() => ({ settings, serverTools }));
         } catch (error) {
