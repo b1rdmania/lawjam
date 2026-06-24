@@ -2,7 +2,7 @@ import type { DesignScheme } from '~/types/design-scheme';
 import { WORK_DIR } from '~/utils/constants';
 import { allowedHTMLElements } from '~/utils/markdown';
 import { stripIndents } from '~/utils/stripIndent';
-import { LAWJAM_SKILLS_INDEX, LAWJAM_SKILLS_FULL } from '~/lib/lawjam/skills/catalogue';
+import { LAWJAM_SKILLS_INDEX } from '~/lib/lawjam/skills/catalogue';
 
 export const getFineTunedPrompt = (
   cwd: string = WORK_DIR,
@@ -34,13 +34,10 @@ The year is 2026.
   </legal_batteries>
 
   <legal_skills>
-    LawJam ships a library of UK legal skills written by practitioners. Each encodes how a real lawyer does a specific task — the rules a generic prompt misses. PERUSE THE CATALOGUE BELOW: when the user's request matches a skill, follow that skill's method (the full method bodies follow the index). Do not re-invent a workflow a skill already covers; do not apply a skill that doesn't fit.
+    LawJam ships a library of practitioner-authored legal skills, each encoding how a real lawyer does a specific task — the rules a generic prompt misses. PERUSE THE CATALOGUE below and, when the user's request matches a skill, build the tool around that skill's approach. Do not re-invent a workflow a skill already covers; do not force a skill that doesn't fit. Always preserve grounding: where a legal task depends on a rule, deadline, or authority, surface it for the user to verify rather than asserting it as settled fact.
 
-    CATALOGUE (index — match the user's task against these):
+    CATALOGUE (match the user's task against these by id + gist):
 ${LAWJAM_SKILLS_INDEX}
-
-    When a skill matches, build the tool around its method and its grounding rules (every one flags where law must be verified — preserve that in the tool's UI; never present a flagged item as settled fact). The full methods:
-${LAWJAM_SKILLS_FULL}
   </legal_skills>
 
   <legal_design>
