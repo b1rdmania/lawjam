@@ -2,6 +2,7 @@ import type { DesignScheme } from '~/types/design-scheme';
 import { WORK_DIR } from '~/utils/constants';
 import { allowedHTMLElements } from '~/utils/markdown';
 import { stripIndents } from '~/utils/stripIndent';
+import { LAWJAM_SKILLS_INDEX, LAWJAM_SKILLS_FULL } from '~/lib/lawjam/skills/catalogue';
 
 export const getFineTunedPrompt = (
   cwd: string = WORK_DIR,
@@ -28,9 +29,19 @@ The year is 2026.
   <legal_batteries>
     LawJam ships pre-wired legal capabilities. Prefer these over re-inventing them:
     - CASE LAW: a case-law retrieval client (CourtListener-style) for real citations. Use it whenever a tool needs to reference authority. See \`app/lib/lawjam/caselaw.ts\`.
-    - SKILLS: reusable UK legal skills (the Lawve catalogue — e.g. pre-motion drafting). See \`app/lib/lawjam/skills/\`.
+    - SKILLS: reusable, practitioner-authored UK legal skills — see <legal_skills> below.
     - These are available both while you build (to ground yourself) and at run-time (the generated app can call them).
   </legal_batteries>
+
+  <legal_skills>
+    LawJam ships a library of UK legal skills written by practitioners. Each encodes how a real lawyer does a specific task — the rules a generic prompt misses. PERUSE THE CATALOGUE BELOW: when the user's request matches a skill, follow that skill's method (the full method bodies follow the index). Do not re-invent a workflow a skill already covers; do not apply a skill that doesn't fit.
+
+    CATALOGUE (index — match the user's task against these):
+${LAWJAM_SKILLS_INDEX}
+
+    When a skill matches, build the tool around its method and its grounding rules (every one flags where law must be verified — preserve that in the tool's UI; never present a flagged item as settled fact). The full methods:
+${LAWJAM_SKILLS_FULL}
+  </legal_skills>
 
   <legal_design>
     Default to a calm, credible, professional look — these are tools a solicitor would put in front of a client. Use shadcn/ui patterns, generous whitespace, a restrained serif/sans pairing, a single accent colour, no gimmicks. Trustworthy and minimal beats flashy. A legal tool that looks like a dev demo will not be used.

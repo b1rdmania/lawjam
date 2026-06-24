@@ -42,8 +42,9 @@ export const links: LinksFunction = () => [
     crossOrigin: 'anonymous',
   },
   {
+    // LawJam type: Newsreader (serif, gravitas) + Hanken Grotesk (clean grotesque UI). Never Inter.
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap',
   },
 ];
 
@@ -51,11 +52,9 @@ const inlineThemeCode = stripIndents`
   setTutorialKitTheme();
 
   function setTutorialKitTheme() {
-    let theme = localStorage.getItem('bolt_theme');
-
-    if (!theme) {
-      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
+    // LawJam is paper, not terminal — default to light regardless of OS preference.
+    // (Users can still toggle; we just don't open in the dark dev look.)
+    let theme = localStorage.getItem('bolt_theme') || 'light';
 
     document.querySelector('html')?.setAttribute('data-theme', theme);
   }
