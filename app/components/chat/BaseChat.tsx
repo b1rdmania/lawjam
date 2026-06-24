@@ -351,7 +351,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
           <div className={classNames(styles.Chat, 'flex flex-col flex-grow lg:min-w-[var(--chat-min-width)] h-full')}>
             {!chatStarted && (
               <div id="intro" className="mt-[16vh] max-w-2xl mx-auto text-center px-4 lg:px-0">
-                <h1 className="lj-serif text-3xl lg:text-6xl font-medium text-bolt-elements-textPrimary mb-4 animate-fade-in">
+                <h1 className="text-3xl lg:text-5xl font-normal tracking-tight text-bolt-elements-textPrimary mb-4 animate-fade-in">
                   Build a legal tool. Just describe it.
                 </h1>
                 <p className="text-md lg:text-xl mb-8 text-bolt-elements-textSecondary animate-fade-in animation-delay-200">

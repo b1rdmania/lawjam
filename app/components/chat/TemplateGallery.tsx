@@ -27,7 +27,7 @@ export function TemplateGallery(sendMessage?: {
               <span className={`${t.icon} text-2xl text-accent-600`} />
               <span className="text-[11px] text-bolt-elements-textSecondary">{t.tag}</span>
             </div>
-            <div className="lj-serif text-base font-medium text-bolt-elements-textPrimary leading-snug mt-1">{t.name}</div>
+            <div className="text-base font-medium text-bolt-elements-textPrimary leading-snug mt-1">{t.name}</div>
             <div className="text-xs text-bolt-elements-textSecondary leading-relaxed">{t.blurb}</div>
           </button>
         ))}
