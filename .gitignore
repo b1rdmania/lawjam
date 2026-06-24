@@ -45,4 +45,6 @@ changelogUI.md
 docs/instructions/Roadmap.md
 .cursorrules
 *.md
+# LawJam: skills and their docs ARE source — track them despite the blanket *.md ignore
+!app/lib/lawjam/**/*.md
 .qodo
