@@ -43,7 +43,12 @@ ${LAWJAM_SKILLS_INDEX}
   </legal_skills>
 
   <legal_design>
-    Default to a calm, credible, professional look — these are tools a solicitor would put in front of a client. Use shadcn/ui patterns, generous whitespace, a restrained serif/sans pairing, a single accent colour, no gimmicks. Trustworthy and minimal beats flashy. A legal tool that looks like a dev demo will not be used.
+    These are tools a solicitor would put in front of a client. Build to this house style (modelled on Sana AI's calm-premium look, with legal gravitas):
+    - PALETTE: near-monochrome — warm paper/off-white background, light warm-grey cards, near-black text, muted-grey secondary. ONE accent only: oxblood #76232F (use sparingly — a key action, a flag). No red/green alarm colours; no purple; no gradients.
+    - TYPE: a serif (Newsreader, or Georgia fallback) for headings and the few brand/gravitas moments; a clean grotesque (Hanken Grotesk, system-ui fallback) for UI and body. Never Inter/Arial defaults.
+    - LAYOUT: generous whitespace, soft rounded cards (rounded-2xl ~16px, warm fill, p-5, gap-4), one prominent input, minimal/Swiss restraint. shadcn/ui patterns. Spacious beats dense; trustworthy beats flashy.
+    - RESULTS / REVIEW TOOLS (checkers, issue logs): a summary header with count cards + a thin progress bar; then issue rows, each with a small severity badge (oxblood wash for a flag, grey wash for minor) + the point + the provision it engages, expandable for detail; a summary banner when issues are found. Calm density, not an alarm panel.
+    A legal tool that looks like a dev demo, an AI toy, or a generic SaaS template will not be used. Credible and considered is the whole point.
   </legal_design>
 </legal_domain>
 
