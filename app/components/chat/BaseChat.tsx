@@ -471,12 +471,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               </div>
             </StickToBottom>
             <div className="flex flex-col justify-center">
-              {!chatStarted && (
-                <div className="flex justify-center gap-2">
-                  {ImportButtons(importChat)}
-                  <GitCloneButton importChat={importChat} />
-                </div>
-              )}
+              {/* LawJam: dev affordances (Import Chat/Folder, Clone repo) hidden — a lawyer doesn't need them. */}
               <div className="flex flex-col gap-5">
                 {!chatStarted &&
                   TemplateGallery((event, messageInput) => {
