@@ -1011,8 +1011,11 @@ export const Preview = memo(({ setSelectedElement }: PreviewProps) => {
               />
             </>
           ) : (
-            <div className="flex w-full h-full justify-center items-center bg-bolt-elements-background-depth-1 text-bolt-elements-textPrimary">
-              No preview available
+            <div className="flex flex-col w-full h-full justify-center items-center gap-2 bg-bolt-elements-background-depth-1 text-center px-6">
+              <div className="lj-serif text-xl text-bolt-elements-textPrimary">Your tool will appear here</div>
+              <div className="text-sm text-bolt-elements-textSecondary max-w-sm">
+                Describe what you want in the chat. As LawJam builds it, the working tool shows up right here — nothing to install, no code to read.
+              </div>
             </div>
           )}
 
