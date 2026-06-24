@@ -14,30 +14,30 @@ export default class AnthropicProvider extends BaseProvider {
 
   staticModels: ModelInfo[] = [
     /*
-     * Essential fallback models - only the most stable/reliable ones
-     * Claude 3.5 Sonnet: 200k context, excellent for complex reasoning and coding
+     * LawJam fallback list — current Claude models (the live list is fetched
+     * from the Anthropic API once a key is added; these show before that).
+     * Sonnet 4.6 is the default: best balance of quality, speed and cost for
+     * building tools. Opus for the hardest builds, Haiku for cheap/fast.
      */
     {
-      name: 'claude-3-5-sonnet-20241022',
-      label: 'Claude 3.5 Sonnet',
+      name: 'claude-sonnet-4-6',
+      label: 'Claude Sonnet 4.6 (recommended)',
       provider: 'Anthropic',
       maxTokenAllowed: 200000,
-      maxCompletionTokens: 128000,
+      maxCompletionTokens: 64000,
     },
 
-    // Claude 3 Haiku: 200k context, fastest and most cost-effective
     {
-      name: 'claude-3-haiku-20240307',
-      label: 'Claude 3 Haiku',
+      name: 'claude-opus-4-8',
+      label: 'Claude Opus 4.8 (most capable)',
       provider: 'Anthropic',
       maxTokenAllowed: 200000,
-      maxCompletionTokens: 128000,
+      maxCompletionTokens: 64000,
     },
 
-    // Claude Opus 4: 200k context, 32k output limit (latest flagship model)
     {
-      name: 'claude-opus-4-20250514',
-      label: 'Claude 4 Opus',
+      name: 'claude-haiku-4-5-20251001',
+      label: 'Claude Haiku 4.5 (fast & cheap)',
       provider: 'Anthropic',
       maxTokenAllowed: 200000,
       maxCompletionTokens: 32000,
