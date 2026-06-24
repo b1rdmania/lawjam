@@ -17,7 +17,7 @@ export function Header() {
     >
       <div className="flex items-center gap-2 z-logo text-bolt-elements-textPrimary cursor-pointer">
         <div className="i-ph:sidebar-simple-duotone text-xl" />
-        <a href="/app" className="text-2xl font-medium flex items-center tracking-tight">
+        <a href="/app" className="text-2xl font-bold flex items-center tracking-[-0.02em]">
           <span className="text-bolt-elements-textPrimary">Law</span>
           <span className="text-accent">Jam</span>
         </a>

@@ -16,10 +16,10 @@ const NAV = [
 
 export function PublicLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-full bg-[#FCFCFB] text-[#1A1A1A] font-[Hanken_Grotesk,ui-sans-serif,system-ui]">
-      <header className="sticky top-0 z-10 bg-[#FCFCFB]/85 backdrop-blur border-b border-black/5">
+    <div className="min-h-full bg-[#FFFFFF] text-[#1A1A1A] font-[Hanken_Grotesk,ui-sans-serif,system-ui]">
+      <header className="sticky top-0 z-10 bg-[#FFFFFF]/85 backdrop-blur border-b border-black/5">
         <div className="mx-auto max-w-5xl px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="text-2xl tracking-tight">
+          <Link to="/" className="text-2xl font-bold tracking-[-0.02em]">
             <span>Law</span>
             <span className="text-accent-700">Jam</span>
           </Link>
@@ -36,7 +36,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             </Link>
             <Link
               to="/app"
-              className="text-sm rounded-full bg-accent-700 hover:bg-accent-800 text-white px-4 py-2 transition-colors"
+              className="text-sm rounded-full bg-[#141414] hover:bg-black text-white px-4 py-2 transition-colors"
             >
               Start building
             </Link>
@@ -64,7 +64,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
   );
 }
 
-/** Section heading — Sana-style: clean sans, light weight, large, tight tracking. */
+/** Section heading — Sana-style: clean sans, BOLD, large, tight tracking. */
 export function H({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <h2 className={`text-3xl sm:text-4xl font-normal tracking-tight leading-tight ${className}`}>{children}</h2>;
+  return <h2 className={`text-3xl sm:text-4xl font-bold tracking-[-0.02em] leading-tight ${className}`}>{children}</h2>;
 }

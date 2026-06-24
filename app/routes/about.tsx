@@ -11,7 +11,7 @@ export default function About() {
     <PublicLayout>
       <section className="pt-20 pb-12 max-w-3xl">
         <p className="text-sm text-accent-700 mb-4">About</p>
-        <h1 className="text-4xl sm:text-5xl leading-tight tracking-tight mb-6">
+        <h1 className="text-4xl sm:text-5xl font-bold leading-tight tracking-tight mb-6">
           Lawyers are already experimenting. They just don't have the right tool.
         </h1>
         <p className="text-lg text-[#52525B] leading-relaxed">
@@ -57,7 +57,7 @@ export default function About() {
         <H>Build a legal tool. Just describe it.</H>
         <a
           href="/app"
-          className="inline-block mt-6 rounded-full bg-accent-700 hover:bg-accent-800 text-white px-6 py-3 transition-colors"
+          className="inline-block mt-6 rounded-full bg-[#141414] hover:bg-black text-white px-6 py-3 transition-colors"
         >
           Start building
         </a>

@@ -34,7 +34,7 @@ export default function Landing() {
     <PublicLayout>
       {/* Hero */}
       <section className="pt-24 pb-16 max-w-3xl">
-        <h1 className="text-5xl sm:text-6xl font-normal leading-[1.05] tracking-tight mb-6">
+        <h1 className="text-5xl sm:text-7xl font-bold leading-[0.95] tracking-[-0.02em] mb-6">
           Build a legal tool.
           <br />
           Just describe it.
@@ -46,7 +46,7 @@ export default function Landing() {
         <div className="flex items-center gap-4">
           <a
             href="/app"
-            className="rounded-full bg-accent-700 hover:bg-accent-800 text-white px-6 py-3 transition-colors"
+            className="rounded-full bg-[#141414] hover:bg-black text-white px-6 py-3 transition-colors"
           >
             Start building
           </a>
@@ -106,7 +106,7 @@ export default function Landing() {
       <section className="py-16 max-w-3xl">
         <H className="mb-6">Build your first tool in minutes.</H>
         <div className="flex items-center gap-4">
-          <a href="/app" className="rounded-full bg-accent-700 hover:bg-accent-800 text-white px-6 py-3 transition-colors">
+          <a href="/app" className="rounded-full bg-[#141414] hover:bg-black text-white px-6 py-3 transition-colors">
             Start building
           </a>
           <a href="/signup" className="text-[#52525B] hover:text-[#1A1A1A] px-2 py-3 transition-colors">

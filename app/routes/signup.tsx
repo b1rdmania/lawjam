@@ -18,7 +18,7 @@ export default function Signup() {
     <PublicLayout>
       <section className="pt-20 pb-20 max-w-xl">
         <p className="text-sm text-accent-700 mb-4">Early access</p>
-        <h1 className="text-4xl sm:text-5xl leading-tight tracking-tight mb-4">Start building.</h1>
+        <h1 className="text-4xl sm:text-5xl font-bold leading-tight tracking-tight mb-4">Start building.</h1>
         <p className="text-lg text-[#52525B] leading-relaxed mb-10">
           Tell us a little about your work and we’ll get you in. No code, grounded in real law, your first tool in
           minutes.
@@ -32,7 +32,7 @@ export default function Signup() {
             </p>
             <a
               href="/app"
-              className="inline-block mt-5 rounded-full bg-accent-700 hover:bg-accent-800 text-white px-5 py-2.5 transition-colors"
+              className="inline-block mt-5 rounded-full bg-[#141414] hover:bg-black text-white px-5 py-2.5 transition-colors"
             >
               Open the builder
             </a>
@@ -67,7 +67,7 @@ export default function Signup() {
             />
             <button
               type="submit"
-              className="mt-1 rounded-full bg-accent-700 hover:bg-accent-800 text-white px-6 py-3 transition-colors self-start"
+              className="mt-1 rounded-full bg-[#141414] hover:bg-black text-white px-6 py-3 transition-colors self-start"
             >
               Request access
             </button>
