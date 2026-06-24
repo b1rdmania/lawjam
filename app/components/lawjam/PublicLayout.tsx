@@ -9,7 +9,6 @@ import type { ReactNode } from 'react';
  */
 
 const NAV = [
-  { label: 'How it works', href: '/#how' },
   { label: 'FAQ', href: '/faq' },
   { label: 'About', href: '/about' },
 ];
@@ -31,11 +30,11 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="flex items-center gap-3">
-            <Link to="/app" className="text-sm text-[#52525B] hover:text-[#1A1A1A]">
+            <Link to="/" className="text-sm text-[#52525B] hover:text-[#1A1A1A]">
               Sign in
             </Link>
             <Link
-              to="/app"
+              to="/"
               className="text-sm rounded-full bg-[#141414] hover:bg-black text-white px-4 py-2 transition-colors"
             >
               Start building
@@ -55,7 +54,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             <Link to="/about" className="hover:text-[#1A1A1A]">About</Link>
             <Link to="/faq" className="hover:text-[#1A1A1A]">FAQ</Link>
             <Link to="/signup" className="hover:text-[#1A1A1A]">Sign up</Link>
-            <Link to="/app" className="hover:text-[#1A1A1A]">Open the builder</Link>
+            <Link to="/" className="hover:text-[#1A1A1A]">Open the builder</Link>
           </nav>
           <div>Build a legal tool. Just describe it.</div>
         </div>

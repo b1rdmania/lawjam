@@ -17,12 +17,12 @@ export function Header() {
     >
       <div className="flex items-center gap-2 z-logo text-bolt-elements-textPrimary cursor-pointer">
         <div className="i-ph:sidebar-simple-duotone text-xl" />
-        <a href="/app" className="text-2xl font-bold flex items-center tracking-[-0.02em]">
+        <a href="/" className="text-2xl font-bold flex items-center tracking-[-0.02em]">
           <span className="text-bolt-elements-textPrimary">Law</span>
           <span className="text-accent">Jam</span>
         </a>
       </div>
-      {chat.started && ( // Display ChatDescription and HeaderActionButtons only when the chat has started.
+      {chat.started ? (
         <>
           <span className="flex-1 px-4 truncate text-center text-bolt-elements-textPrimary">
             <ClientOnly>{() => <ChatDescription />}</ClientOnly>
@@ -35,6 +35,15 @@ export function Header() {
             )}
           </ClientOnly>
         </>
+      ) : (
+        <nav className="ml-auto flex items-center gap-6 text-sm text-bolt-elements-textSecondary">
+          <a href="/about" className="hover:text-bolt-elements-textPrimary transition-theme">
+            About
+          </a>
+          <a href="/faq" className="hover:text-bolt-elements-textPrimary transition-theme">
+            FAQ
+          </a>
+        </nav>
       )}
     </header>
   );

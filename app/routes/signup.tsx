@@ -31,7 +31,7 @@ export default function Signup() {
               We’ll be in touch shortly. In the meantime, you can open the builder and try a template.
             </p>
             <a
-              href="/app"
+              href="/"
               className="inline-block mt-5 rounded-full bg-[#141414] hover:bg-black text-white px-5 py-2.5 transition-colors"
             >
               Open the builder
