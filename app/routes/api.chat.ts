@@ -14,6 +14,7 @@ import { extractPropertiesFromMessage } from '~/lib/.server/llm/utils';
 import type { DesignScheme } from '~/types/design-scheme';
 import { MCPService } from '~/lib/services/mcpService';
 import { StreamRecoveryManager } from '~/lib/.server/llm/stream-recovery';
+import { LAWJAM_TOOLS } from '~/lib/lawjam/skills/read-skill-tool';
 
 export async function action(args: ActionFunctionArgs) {
   return chatAction(args);
@@ -210,8 +211,15 @@ async function chatAction({ context, request }: ActionFunctionArgs) {
         const options: StreamingOptions = {
           supabaseConnection: supabase,
           toolChoice: 'auto',
-          tools: mcpService.toolsWithoutExecute,
-          maxSteps: maxLLMSteps,
+
+          // Merge LawJam's server-side tools (read_skill) with the MCP tools.
+          // MCP tools are passed WITHOUT execute (client approval flow); read_skill
+          // keeps its execute so it runs server-side automatically inside maxSteps.
+          tools: { ...mcpService.toolsWithoutExecute, ...LAWJAM_TOOLS },
+
+          // Ensure the model can call read_skill then continue. Respect the
+          // request's maxLLMSteps when set, but never below 5 so the tool loop runs.
+          maxSteps: Math.max(maxLLMSteps ?? 0, 5),
           onStepFinish: ({ toolCalls }) => {
             // add tool call annotations for frontend processing
             toolCalls.forEach((toolCall) => {

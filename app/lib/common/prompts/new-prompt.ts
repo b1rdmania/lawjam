@@ -40,6 +40,8 @@ The year is 2026.
 
     CATALOGUE (match the user's task against these by id + gist):
 ${LAWJAM_SKILLS_INDEX}
+
+    Once a skill matches the user's task, call read_skill(id) to load its FULL method, then build to that method — the catalogue line is only a gist; do not rely on it alone.
   </legal_skills>
 
   <legal_design>
