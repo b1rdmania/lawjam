@@ -1,7 +1,9 @@
 .BaseChat {
   &[data-chat-visible='false'] {
-    --workbench-inner-width: 100%;
-    --workbench-left: 0;
+    /* Chat hidden: workbench fills the column, but the rail (248px on lg+) still
+       sits to its left, so start from the rail edge — not the viewport edge. */
+    --workbench-inner-width: calc(100% - var(--rail-width));
+    --workbench-left: var(--rail-width);
 
     .Chat {
       --at-apply: bolt-ease-cubic-bezier;
