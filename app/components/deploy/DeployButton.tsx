@@ -11,6 +11,7 @@ import { NetlifyDeploymentLink } from '~/components/chat/NetlifyDeploymentLink.c
 import { VercelDeploymentLink } from '~/components/chat/VercelDeploymentLink.client';
 import { useVercelDeploy } from '~/components/deploy/VercelDeploy.client';
 import { useNetlifyDeploy } from '~/components/deploy/NetlifyDeploy.client';
+import { useHereNowDeploy } from '~/components/deploy/HereNowDeploy.client';
 import { useGitHubDeploy } from '~/components/deploy/GitHubDeploy.client';
 import { useGitLabDeploy } from '~/components/deploy/GitLabDeploy.client';
 import { GitHubDeploymentDialog } from '~/components/deploy/GitHubDeploymentDialog';
@@ -36,10 +37,11 @@ export const DeployButton = ({
   const previews = useStore(workbenchStore.previews);
   const activePreview = previews[activePreviewIndex];
   const [isDeploying, setIsDeploying] = useState(false);
-  const [deployingTo, setDeployingTo] = useState<'netlify' | 'vercel' | 'github' | 'gitlab' | null>(null);
+  const [deployingTo, setDeployingTo] = useState<'herenow' | 'netlify' | 'vercel' | 'github' | 'gitlab' | null>(null);
   const isStreaming = useStore(streamingState);
   const { handleVercelDeploy } = useVercelDeploy();
   const { handleNetlifyDeploy } = useNetlifyDeploy();
+  const { handleHereNowDeploy } = useHereNowDeploy();
   const { handleGitHubDeploy } = useGitHubDeploy();
   const { handleGitLabDeploy } = useGitLabDeploy();
   const [showGitHubDeploymentDialog, setShowGitHubDeploymentDialog] = useState(false);
@@ -48,6 +50,18 @@ export const DeployButton = ({
   const [gitlabDeploymentFiles, setGitlabDeploymentFiles] = useState<Record<string, string> | null>(null);
   const [githubProjectName, setGithubProjectName] = useState('');
   const [gitlabProjectName, setGitlabProjectName] = useState('');
+
+  const handleHereNowDeployClick = async () => {
+    setIsDeploying(true);
+    setDeployingTo('herenow');
+
+    try {
+      await handleHereNowDeploy();
+    } finally {
+      setIsDeploying(false);
+      setDeployingTo(null);
+    }
+  };
 
   const handleVercelDeployClick = async () => {
     setIsDeploying(true);
@@ -149,6 +163,20 @@ export const DeployButton = ({
             align="end"
           >
             <div className="px-4 pt-1 pb-2 text-xs text-bolt-elements-textTertiary">Where to publish</div>
+            <DropdownMenu.Item
+              className={classNames(
+                'cursor-pointer flex items-center w-full px-4 py-2 text-sm text-bolt-elements-textPrimary hover:bg-bolt-elements-item-backgroundActive gap-2 rounded-md group relative',
+                {
+                  'opacity-60 cursor-not-allowed': isDeploying || !activePreview,
+                },
+              )}
+              disabled={isDeploying || !activePreview}
+              onClick={handleHereNowDeployClick}
+            >
+              <span className="i-ph:globe w-5 h-5 text-accent-500" />
+              <span className="mx-auto">Publish as website (here.now)</span>
+            </DropdownMenu.Item>
+
             <DropdownMenu.Item
               className={classNames(
                 'cursor-pointer flex items-center w-full px-4 py-2 text-sm text-bolt-elements-textPrimary hover:bg-bolt-elements-item-backgroundActive gap-2 rounded-md group relative',
