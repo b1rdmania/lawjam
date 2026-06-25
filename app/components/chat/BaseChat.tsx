@@ -357,6 +357,9 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 <p className="text-md lg:text-xl mb-8 text-bolt-elements-textSecondary animate-fade-in animation-delay-200">
                   LawJam turns a plain-English idea into a working legal web tool — grounded in real law, no code required.
                 </p>
+                <p className="text-sm text-bolt-elements-textTertiary animate-fade-in animation-delay-200">
+                  Pick a design system below, then describe the tool you want — in plain English.
+                </p>
               </div>
             )}
             <StickToBottom

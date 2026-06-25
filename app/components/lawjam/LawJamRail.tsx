@@ -6,6 +6,9 @@
  * persistent primary nav + brand.
  */
 
+import { useEffect, useState } from 'react';
+import { db, getAll, type ChatHistoryItem } from '~/lib/persistence';
+
 const NAV = [
   { label: 'New chat', href: '/', icon: 'i-ph:plus' },
   { label: 'My tools', href: '/tools', icon: 'i-ph:squares-four' },
@@ -18,6 +21,51 @@ const FOOTER = [
   { label: 'About', href: '/about' },
   { label: 'FAQ', href: '/faq' },
 ];
+
+function Recents() {
+  const [recents, setRecents] = useState<ChatHistoryItem[]>([]);
+
+  useEffect(() => {
+    if (!db) {
+      return;
+    }
+
+    getAll(db)
+      .then((list) =>
+        setRecents(
+          list
+            .filter((t) => (t.urlId || t.id) && t.description)
+            .sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1))
+            .slice(0, 6),
+        ),
+      )
+      .catch(() => setRecents([]));
+  }, []);
+
+  if (recents.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="mt-6">
+      <div className="px-3 mb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-bolt-elements-textTertiary">
+        Recents
+      </div>
+      <nav className="flex flex-col gap-0.5">
+        {recents.map((t) => (
+          <a
+            key={t.id}
+            href={`/chat/${t.urlId || t.id}`}
+            title={t.description}
+            className="truncate rounded-lg px-3 py-1.5 text-sm text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary hover:bg-bolt-elements-background-depth-2 transition-theme"
+          >
+            {t.description}
+          </a>
+        ))}
+      </nav>
+    </div>
+  );
+}
 
 export function LawJamRail() {
   return (
@@ -45,6 +93,8 @@ export function LawJamRail() {
           </a>
         ))}
       </nav>
+
+      <Recents />
 
       <div className="mt-auto flex flex-col gap-0.5 pt-4 border-t border-bolt-elements-borderColor">
         {FOOTER.map((n) => (
