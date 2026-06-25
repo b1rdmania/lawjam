@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import { useState } from 'react';
 import { classNames } from '~/utils/classNames';
 import type { DeployAlert } from '~/types/actions';
 
@@ -10,6 +11,21 @@ interface DeployAlertProps {
 
 export default function DeployChatAlert({ alert, clearAlert, postMessage }: DeployAlertProps) {
   const { type, title, description, content, url, stage, buildStatus, deployStatus } = alert;
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyLink = async () => {
+    if (!url) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy link:', err);
+    }
+  };
 
   // Determine if we should show the deployment progress
   const showProgress = stage && (buildStatus || deployStatus);
@@ -135,16 +151,40 @@ export default function DeployChatAlert({ alert, clearAlert, postMessage }: Depl
                 </div>
               )}
               {url && type === 'success' && (
-                <div className="mt-2">
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-bolt-elements-item-contentAccent hover:underline flex items-center"
-                  >
-                    <span className="mr-1">View deployed site</span>
-                    <div className="i-ph:arrow-square-out"></div>
-                  </a>
+                <div className="mt-3 rounded-md border border-bolt-elements-borderColor bg-bolt-elements-background-depth-3 p-3">
+                  <div className="text-xs font-medium text-bolt-elements-textPrimary mb-1.5">Your tool is live</div>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 truncate text-accent-500 hover:underline text-sm"
+                      title={url}
+                    >
+                      {url}
+                    </a>
+                    <button
+                      onClick={handleCopyLink}
+                      className={classNames(
+                        'flex-shrink-0 flex items-center gap-1 px-2 py-1 rounded text-xs font-medium',
+                        'bg-accent-500 text-white hover:bg-bolt-elements-button-primary-backgroundHover',
+                      )}
+                      title="Copy link to share with your client"
+                    >
+                      <div className={copied ? 'i-ph:check' : 'i-ph:copy'}></div>
+                      {copied ? 'Copied' : 'Copy link'}
+                    </button>
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-shrink-0 flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-bolt-elements-button-secondary-background hover:bg-bolt-elements-button-secondary-backgroundHover text-bolt-elements-button-secondary-text"
+                      title="Open your published tool"
+                    >
+                      <span>Open</span>
+                      <div className="i-ph:arrow-square-out"></div>
+                    </a>
+                  </div>
                 </div>
               )}
             </motion.div>

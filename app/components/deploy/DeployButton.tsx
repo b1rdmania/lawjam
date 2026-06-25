@@ -133,7 +133,7 @@ export const DeployButton = ({
             disabled={isDeploying || !activePreview || isStreaming}
             className="rounded-md items-center justify-center [&:is(:disabled,.disabled)]:cursor-not-allowed [&:is(:disabled,.disabled)]:opacity-60 px-3 py-1.5 text-xs bg-accent-500 text-white hover:text-bolt-elements-item-contentAccent [&:not(:disabled,.disabled)]:hover:bg-bolt-elements-button-primary-backgroundHover outline-accent-500 flex gap-1.7"
           >
-            {isDeploying ? `Deploying to ${deployingTo}...` : 'Deploy'}
+            {isDeploying ? `Publishing to ${deployingTo}...` : 'Publish & share'}
             <span className={classNames('i-ph:caret-down transition-transform')} />
           </DropdownMenu.Trigger>
           <DropdownMenu.Content
@@ -148,6 +148,7 @@ export const DeployButton = ({
             sideOffset={5}
             align="end"
           >
+            <div className="px-4 pt-1 pb-2 text-xs text-bolt-elements-textTertiary">Where to publish</div>
             <DropdownMenu.Item
               className={classNames(
                 'cursor-pointer flex items-center w-full px-4 py-2 text-sm text-bolt-elements-textPrimary hover:bg-bolt-elements-item-backgroundActive gap-2 rounded-md group relative',
@@ -166,7 +167,7 @@ export const DeployButton = ({
                 src="https://cdn.simpleicons.org/netlify"
               />
               <span className="mx-auto">
-                {!netlifyConn.user ? 'No Netlify Account Connected' : 'Deploy to Netlify'}
+                {!netlifyConn.user ? 'Connect Netlify to publish here' : 'Publish to Netlify'}
               </span>
               {netlifyConn.user && <NetlifyDeploymentLink />}
             </DropdownMenu.Item>
@@ -189,7 +190,9 @@ export const DeployButton = ({
                 src="https://cdn.simpleicons.org/vercel/white"
                 alt="vercel"
               />
-              <span className="mx-auto">{!vercelConn.user ? 'No Vercel Account Connected' : 'Deploy to Vercel'}</span>
+              <span className="mx-auto">
+                {!vercelConn.user ? 'Connect Vercel to publish here' : 'Publish to Vercel'}
+              </span>
               {vercelConn.user && <VercelDeploymentLink />}
             </DropdownMenu.Item>
 
@@ -211,7 +214,7 @@ export const DeployButton = ({
                 src="https://cdn.simpleicons.org/github"
                 alt="github"
               />
-              <span className="mx-auto">Deploy to GitHub</span>
+              <span className="mx-auto">Publish to GitHub</span>
             </DropdownMenu.Item>
 
             <DropdownMenu.Item
@@ -232,7 +235,9 @@ export const DeployButton = ({
                 src="https://cdn.simpleicons.org/gitlab"
                 alt="gitlab"
               />
-              <span className="mx-auto">{!gitlabIsConnected ? 'No GitLab Account Connected' : 'Deploy to GitLab'}</span>
+              <span className="mx-auto">
+                {!gitlabIsConnected ? 'Connect GitLab to publish here' : 'Publish to GitLab'}
+              </span>
             </DropdownMenu.Item>
 
             <DropdownMenu.Item
@@ -247,7 +252,7 @@ export const DeployButton = ({
                 src="https://cdn.simpleicons.org/cloudflare"
                 alt="cloudflare"
               />
-              <span className="mx-auto">Deploy to Cloudflare (Coming Soon)</span>
+              <span className="mx-auto">Publish to Cloudflare (Coming Soon)</span>
             </DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu.Root>
