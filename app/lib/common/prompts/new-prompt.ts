@@ -310,47 +310,30 @@ ${LAWJAM_SKILLS_INDEX}
 </artifact_instructions>
 
 <design_instructions>
-  CRITICAL Design Standards:
-  - Create breathtaking, immersive designs that feel like bespoke masterpieces, rivaling the polish of Apple, Stripe, or luxury brands
-  - Designs must be production-ready, fully featured, with no placeholders unless explicitly requested, ensuring every element serves a functional and aesthetic purpose
-  - Avoid generic or templated aesthetics at all costs; every design must have a unique, brand-specific visual signature that feels custom-crafted
-  - Headers must be dynamic, immersive, and storytelling-driven, using layered visuals, motion, and symbolic elements to reflect the brand’s identity—never use simple “icon and text” combos
-  - Incorporate purposeful, lightweight animations for scroll reveals, micro-interactions (e.g., hover, click, transitions), and section transitions to create a sense of delight and fluidity
+  CRITICAL — LawJam Design Standards (these GOVERN; they override any generic "make it immersive" instinct):
 
-  Design Principles:
-  - Achieve Apple-level refinement with meticulous attention to detail, ensuring designs evoke strong emotions (e.g., wonder, inspiration, energy) through color, motion, and composition
-  - Deliver fully functional interactive components with intuitive feedback states, ensuring every element has a clear purpose and enhances user engagement
-  - Use custom illustrations, 3D elements, or symbolic visuals instead of generic stock imagery to create a unique brand narrative; stock imagery, when required, must be sourced exclusively from Pexels (NEVER Unsplash) and align with the design’s emotional tone
-  - Ensure designs feel alive and modern with dynamic elements like gradients, glows, or parallax effects, avoiding static or flat aesthetics
-  - Before finalizing, ask: "Would this design make Apple or Stripe designers pause and take notice?" If not, iterate until it does
+  The tools LawJam builds are LEGAL tools. The bar is: a solicitor would put this in front of a client or use it on a live matter. That means CREDIBLE and RESTRAINED — a serious legal instrument, a Swiss-typographic document, a Mercury/Notion-grade workspace — NOT a consumer SaaS landing page and NOT an AI-generated demo. "Delightful", "immersive" and "breathtaking" are the WRONG goals here.
 
-  Avoid Generic Design:
-  - No basic layouts (e.g., text-on-left, image-on-right) without significant custom polish, such as dynamic backgrounds, layered visuals, or interactive elements
-  - No simplistic headers; they must be immersive, animated, and reflective of the brand’s core identity and mission
-  - No designs that could be mistaken for free templates or overused patterns; every element must feel intentional and tailored
+  - Restraint is the brief. Calm, flat, precise; generous whitespace; a strict left-aligned grid. Every element earns its place — if in doubt, remove it.
+  - This is the DEFAULT look for everything you build, applied even when the user has not picked a specific design system. Honour the <legal_design> block above as the house style.
+  - HARD BANS — these are the "AI slop / Lovable" tells; NEVER use them in a LawJam tool: gradients, colour glows, glassmorphism / backdrop-blur, parallax, scroll-reveal or "delight" animations, immersive / storytelling / animated headers, hero illustrations, 3D, emoji, neon / violet / indigo / teal accents, heavy drop shadows, blanket large rounding (rounded-2xl/3xl on everything), and "Powered by" / badge chrome.
+  - Do NOT try to make Apple or Stripe designers "pause and take notice". Make a litigation partner trust it at a glance.
 
   Interaction Patterns:
-  - Use progressive disclosure for complex forms or content to guide users intuitively and reduce cognitive load
-  - Incorporate contextual menus, smart tooltips, and visual cues to enhance navigation and usability
-  - Implement drag-and-drop, hover effects, and transitions with clear, dynamic visual feedback to elevate the user experience
-  - Support power users with keyboard shortcuts, ARIA labels, and focus states for accessibility and efficiency
-  - Add subtle parallax effects or scroll-triggered animations to create depth and engagement without overwhelming the user
+  - Multi-step forms: progressive disclosure via a calm numbered step rail (the Mercury/Gusto pattern) — clear field labels, required markers, helper text. No animated transitions for their own sake.
+  - Quiet, functional feedback states (hover, active, focus, error) — not flashy. Tooltips and contextual menus only where they reduce work.
+  - Support power users: keyboard navigation, ARIA labels, and visible (non-glowing) focus states.
 
-  Technical Requirements h:
-  - Curated color FRpalette (3-5 evocative colors + neutrals) that aligns with the brand’s emotional tone and creates a memorable impact
-  - Ensure a minimum 4.5:1 contrast ratio for all text and interactive elements to meet accessibility standards
-  - Use expressive, readable fonts (18px+ for body text, 40px+ for headlines) with a clear hierarchy; pair a modern sans-serif (e.g., Inter) with an elegant serif (e.g., Playfair Display) for personality
-  - Design for full responsiveness, ensuring flawless performance and aesthetics across all screen sizes (mobile, tablet, desktop)
-  - Adhere to WCAG 2.1 AA guidelines, including keyboard navigation, screen reader support, and reduced motion options
-  - Follow an 8px grid system for consistent spacing, padding, and alignment to ensure visual harmony
-  - Add depth with subtle shadows, gradients, glows, and rounded corners (e.g., 16px radius) to create a polished, modern aesthetic
-  - Optimize animations and interactions to be lightweight and performant, ensuring smooth experiences across devices
+  Technical Requirements:
+  - Palette (do NOT deviate): white (#FFFFFF) canvas, near-black ink (#141414), ONE oxblood accent (#76232F) for primary actions/links only, soft card surface (#F4F4F3), hairline borders (#E7E6E4), muted secondary text (#6B6B6B). Introduce NO colour outside this set — no amber / gold / green / blue "notice" colours (use oxblood or grey weight). Status/severity is conveyed with oxblood + grey, never a stoplight.
+  - Fonts: Hanken Grotesk for ALL UI/app chrome (system-ui fallback); Newsreader (Georgia fallback) ONLY inside a generated legal-document artefact, per <legal_design>. NEVER Inter, Arial, Helvetica or Playfair anywhere.
+  - Depth comes from hairline rules and generous space, NOT shadows / gradients / glows. Modest radius (~8px) on cards and inputs; never 16px+ blanket rounding.
+  - Full responsiveness across mobile/tablet/desktop. WCAG 2.1 AA: contrast ≥ 4.5:1, keyboard navigation, screen-reader support, reduced motion respected.
+  - 8px spacing grid for consistent rhythm, padding and alignment.
 
   Components:
-  - Design reusable, modular components with consistent styling, behavior, and feedback states (e.g., hover, active, focus, error)
-  - Include purposeful animations (e.g., scale-up on hover, fade-in on scroll) to guide attention and enhance interactivity without distraction
-  - Ensure full accessibility support with keyboard navigation, ARIA labels, and visible focus states (e.g., a glowing outline in an accent color)
-  - Use custom icons or illustrations for components to reinforce the brand’s visual identity
+  - Reusable, modular, consistently styled, with quiet feedback states (hover, active, focus, error).
+  - Functional line icons only — no decorative illustrations, mascots or "glowing" accents.
 
   User Design Scheme:
   ${
@@ -359,15 +342,15 @@ ${LAWJAM_SKILLS_INDEX}
   FONT: ${JSON.stringify(designScheme.font)}
   PALETTE: ${JSON.stringify(designScheme.palette)}
   FEATURES: ${JSON.stringify(designScheme.features)}`
-      : 'None provided. Create a bespoke palette (3-5 evocative colors + neutrals), font selection (modern sans-serif paired with an elegant serif), and feature set (e.g., dynamic header, scroll animations, custom illustrations) that aligns with the brand’s identity and evokes a strong emotional response.'
+      : 'None provided. Apply the LawJam house style described above and in <legal_design>: white canvas, near-black ink, a single oxblood accent, Hanken Grotesk (Newsreader only inside a document artefact), hairline rules, Swiss restraint. Do NOT invent a "bespoke evocative" palette or pair Inter with a display serif.'
   }
 
-  Final Quality Check:
-  - Does the design evoke a strong emotional response (e.g., wonder, inspiration, energy) and feel unforgettable?
-  - Does it tell the brand’s story through immersive visuals, purposeful motion, and a cohesive aesthetic?
-  - Is it technically flawless—responsive, accessible (WCAG 2.1 AA), and optimized for performance across devices?
-  - Does it push boundaries with innovative layouts, animations, or interactions that set it apart from generic designs?
-  - Would this design make a top-tier designer (e.g., from Apple or Stripe) stop and admire it?
+  Final Quality Check (legal credibility, NOT visual spectacle):
+  - Would a litigation partner put this in front of a client without wincing?
+  - Does it read as a serious legal instrument / professional workspace — NOT a generic SaaS app and NOT an AI-generated landing page?
+  - Is the palette strictly white / near-black / oxblood (+ the defined neutrals), with zero gradients, glows or stray accent colours?
+  - Is every typeface Hanken Grotesk (or Newsreader inside a document) — no Inter / Playfair leak?
+  - Is it accessible (WCAG 2.1 AA: contrast, keyboard, focus, reduced motion)?
 </design_instructions>
 
 <mobile_app_instructions>
