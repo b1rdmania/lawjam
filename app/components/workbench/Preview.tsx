@@ -667,12 +667,20 @@ export const Preview = memo(({ setSelectedElement }: PreviewProps) => {
       )}
       <div className="bg-bolt-elements-background-depth-2 p-2 flex items-center gap-2">
         <div className="flex items-center gap-2">
-          <IconButton icon="i-ph:arrow-clockwise" onClick={reloadPreview} />
-          <IconButton
-            icon="i-ph:selection"
+          <IconButton icon="i-ph:arrow-clockwise" onClick={reloadPreview} title="Refresh" />
+          {/* LawJam: surface bolt's selection tool as a clear no-code "Click to edit" affordance. */}
+          <button
             onClick={() => setIsSelectionMode(!isSelectionMode)}
-            className={isSelectionMode ? 'bg-bolt-elements-background-depth-3' : ''}
-          />
+            title="Point at any part of your tool, then say what to change — no code needed"
+            className={`flex items-center gap-1.5 rounded-md px-2 py-1 text-xs whitespace-nowrap transition-theme ${
+              isSelectionMode
+                ? 'bg-accent-500/15 text-accent-700'
+                : 'text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary hover:bg-bolt-elements-background-depth-3'
+            }`}
+          >
+            <span className="i-ph:cursor-click text-base" />
+            {isSelectionMode ? 'Click an element' : 'Click to edit'}
+          </button>
         </div>
 
         <div className="flex-grow flex items-center gap-1 bg-bolt-elements-preview-addressBar-background border border-bolt-elements-borderColor text-bolt-elements-preview-addressBar-text rounded-full px-1 py-1 text-sm hover:bg-bolt-elements-preview-addressBar-backgroundHover hover:focus-within:bg-bolt-elements-preview-addressBar-backgroundActive focus-within:bg-bolt-elements-preview-addressBar-backgroundActive focus-within-border-bolt-elements-borderColorActive focus-within:text-bolt-elements-preview-addressBar-textActive">
