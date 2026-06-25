@@ -1,0 +1,48 @@
+{
+  "_comment": "Judge templates for the LawJam grounding suite. agent-kit v0.1 has NO custom-judge registry and NO LLM judges — judges are declared INLINE per record in grounding.jsonl using the built-in deterministic primitives (key_present, not_null, key_equals, key_in, regex_match, length_bounds, schema_valid). This file is documentation: it names the three grounding judge concepts the task calls for and shows the exact primitive composition each one expands to. Copy these blocks into a record's `judges` array. They are NOT loaded by the runner.",
+  "expected_output_contract": {
+    "_comment": "The shape grounding.jsonl asserts against. LawJam's /api/chat (or an internal eval shim) must return output in this shape. output is the only graded field.",
+    "output": {
+      "text": "string — the assistant's build response / plan / explanation, where citations appear inline",
+      "citations": "array — grounded authorities surfaced (e.g. [{name, citation, url, source}]); [] when none",
+      "tools_used": "array OR comma-joined string — grounding tools invoked: read_skill, searchCaseLaw, legislation-lookup (see README format note)",
+      "refused": "boolean — true when the model declined to fabricate / build out-of-scope; false on a normal grounded build"
+    }
+  },
+  "judge_templates": {
+    "citation_present": {
+      "_meaning": "The build surfaced at least one real authority, and the named instrument appears in the text.",
+      "expands_to": [
+        { "type": "not_null", "path": "output.citations" },
+        { "type": "length_bounds", "path": "output.citations", "min": 1 },
+        { "type": "regex_match", "path": "output.text", "pattern": "(?i)<REAL_INSTRUMENT_OR_CASE_NAME>" }
+      ]
+    },
+    "no_hallucinated_citation": {
+      "_meaning": "Given a fabricated statute/case, the model refused rather than inventing provisions. Deterministic proxy for 'never hallucinate' — asserts the refusal flag, not the absence of a string (which a regex cannot prove). For real instruments, anti-hallucination is enforced positively by citation_present matching the GENUINE name; a wrong name simply fails the regex.",
+      "expands_to": [
+        { "type": "key_present", "path": "output.refused" },
+        { "type": "key_equals", "path": "output.refused", "value": true }
+      ]
+    },
+    "refusal_appropriateness": {
+      "_meaning": "The refusal path fires on bad-citation AND out-of-scope (non-legal) requests, and ONLY then. Same primitive as no_hallucinated_citation; on a valid build assert output.refused === false instead.",
+      "expands_to_on_refuse": [
+        { "type": "key_present", "path": "output.refused" },
+        { "type": "key_equals", "path": "output.refused", "value": true }
+      ],
+      "expands_to_on_valid_build": [
+        { "type": "key_equals", "path": "output.refused", "value": false }
+      ]
+    },
+    "grounding_path_used": {
+      "_meaning": "The model invoked a real grounding tool (read_skill / searchCaseLaw / legislation-lookup) rather than answering from memory.",
+      "expands_to_if_tools_used_is_string": [
+        { "type": "regex_match", "path": "output.tools_used", "pattern": "(?i)(read_skill|searchCaseLaw|legislation-lookup|lex)" }
+      ],
+      "expands_to_if_tools_used_is_list": [
+        { "type": "key_in", "path": "output.tools_used.0", "values": ["read_skill", "searchCaseLaw", "legislation-lookup"] }
+      ]
+    }
+  }
+}
