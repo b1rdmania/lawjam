@@ -212,13 +212,19 @@ async function chatAction({ context, request }: ActionFunctionArgs) {
           supabaseConnection: supabase,
           toolChoice: 'auto',
 
-          // Merge LawJam's server-side tools (read_skill) with the MCP tools.
-          // MCP tools are passed WITHOUT execute (client approval flow); read_skill
-          // keeps its execute so it runs server-side automatically inside maxSteps.
-          tools: { ...mcpService.toolsWithoutExecute, ...LAWJAM_TOOLS },
+          // Merge LawJam's server-side tools (read_skill) with the MCP tools, both
+          // WITH execute so they resolve server-side inside the maxSteps loop.
+          // LawJam grounding (Lex case law, connectors) and skill reads happen
+          // invisibly — no client approval round-trip a non-coding lawyer can't follow.
+          //
+          // NB: do NOT use mcpService.toolsWithoutExecute here. That strips execute
+          // for bolt's client round-trip flow; combined with a server-side maxSteps
+          // loop it leaves the MCP tool call in state:"call" with no result, and
+          // streamText throws a ToolInvocation error mid-build.
+          tools: { ...mcpService.tools, ...LAWJAM_TOOLS },
 
-          // Ensure the model can call read_skill then continue. Respect the
-          // request's maxLLMSteps when set, but never below 5 so the tool loop runs.
+          // Ensure the model can call a tool (read_skill / Lex) then continue with
+          // the result. Respect maxLLMSteps when set, but never below 5 so the loop runs.
           maxSteps: Math.max(maxLLMSteps ?? 0, 5),
           onStepFinish: ({ toolCalls }) => {
             // add tool call annotations for frontend processing
