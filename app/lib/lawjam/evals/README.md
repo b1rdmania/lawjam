@@ -15,7 +15,7 @@ Built-in judge primitives used: `key_present`, `not_null`, `key_equals`, `key_in
 
 ## What the suite checks
 
-16 cases over LawJam's grounding promise:
+15 cases over LawJam's grounding promise:
 
 | Concern | Cases | Assertion |
 |---|---|---|
