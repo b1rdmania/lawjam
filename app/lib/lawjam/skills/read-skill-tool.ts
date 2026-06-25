@@ -1,6 +1,7 @@
 import { tool, type ToolSet } from 'ai';
 import { z } from 'zod';
 import { LAWJAM_SKILLS_FULL } from './catalogue';
+import { verifyQuoteTool } from '../verify-quote-tool';
 
 /**
  * `read_skill` — lets the LLM orchestrator load a legal skill's FULL method body
@@ -29,4 +30,5 @@ export const readSkillTool = tool({
  */
 export const LAWJAM_TOOLS: ToolSet = {
   read_skill: readSkillTool,
+  verify_quote: verifyQuoteTool,
 };
