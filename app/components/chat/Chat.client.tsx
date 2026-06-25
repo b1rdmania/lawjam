@@ -27,6 +27,7 @@ import { defaultDesignScheme, type DesignScheme } from '~/types/design-scheme';
 import type { ElementInfo } from '~/components/workbench/Inspector';
 import type { TextUIPart, FileUIPart, Attachment } from '@ai-sdk/ui-utils';
 import { useMCPStore } from '~/lib/stores/mcp';
+import { buildKnowledgeContext } from '~/lib/lawjam/knowledge';
 import type { LlmErrorAlertType } from '~/types/actions';
 
 const logger = createScopedLogger('Chat');
@@ -410,6 +411,16 @@ export const ChatImpl = memo(
       runAnimation();
 
       if (!chatStarted) {
+        // Ground the first build message in the firm's saved Knowledge (playbook,
+        // house style, standard clauses). Bounded + first-message-only so we don't
+        // bloat every turn. The system prompt is built server-side and can't read
+        // localStorage, so we prepend here in the client flow.
+        const knowledgeContext = buildKnowledgeContext();
+
+        if (knowledgeContext) {
+          finalMessageContent = knowledgeContext + finalMessageContent;
+        }
+
         setFakeLoading(true);
 
         if (autoSelectTemplate) {

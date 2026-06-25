@@ -9,6 +9,7 @@
 const NAV = [
   { label: 'New chat', href: '/', icon: 'i-ph:plus' },
   { label: 'My tools', href: '/tools', icon: 'i-ph:squares-four' },
+  { label: 'Knowledge', href: '/knowledge', icon: 'i-ph:book-open' },
   { label: 'Designs', href: '/#template-gallery', icon: 'i-ph:palette' },
   { label: 'Connectors', href: '/connectors', icon: 'i-ph:plugs-connected' },
 ];
