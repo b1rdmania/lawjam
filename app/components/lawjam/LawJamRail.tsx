@@ -14,6 +14,7 @@ const NAV = [
   { label: 'My tools', href: '/tools', icon: 'i-ph:squares-four' },
   { label: 'Knowledge', href: '/knowledge', icon: 'i-ph:book-open' },
   { label: 'Designs', href: '/#template-gallery', icon: 'i-ph:palette' },
+  { label: 'Examples', href: '/examples', icon: 'i-ph:lightbulb' },
   { label: 'Connectors', href: '/connectors', icon: 'i-ph:plugs-connected' },
 ];
 
