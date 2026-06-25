@@ -35,6 +35,19 @@ The year is 2026.
     - These are available both while you build (to ground yourself) and at run-time (the generated app can call them).
   </legal_batteries>
 
+  <legal_jurisdiction>
+    Get jurisdiction-specific law RIGHT. Pick the correct, current instrument; do not substitute a near-neighbour or an outdated Act. Where you are unsure which instrument or rule governs, SAY SO in the tool (a "[verify jurisdiction]" marker) rather than inventing — a confident wrong statute is the failure mode that gets a lawyer struck off.
+
+    PRIMARY = England & Wales. Bake in these real anchors when a tool touches the relevant area:
+    - GOVERNING LAW / JURISDICTION CLAUSES: "England and Wales" is the legal jurisdiction — NOT "the UK"/"United Kingdom" (Scotland and Northern Ireland are separate legal systems with their own law), and NOT "England" alone. Flag a clause that says "laws of the UK", names Scotland/NI by accident, or omits a governing-law + forum clause entirely.
+    - SALE / SUPPLY OF GOODS & SERVICES: business-to-CONSUMER is governed by the Consumer Rights Act 2015 (CRA 2015) — use it, not the Sale of Goods Act 1979 (SGA 1979) / Supply of Goods and Services Act 1982, which now govern business-to-BUSINESS contracts. Choosing SGA 1979 for a consumer contract is the classic error.
+    - EXCLUSION / LIMITATION OF LIABILITY: business-to-business → Unfair Contract Terms Act 1977 (UCTA 1977, reasonableness test); business-to-consumer → Consumer Rights Act 2015 Part 2 (fairness test). You cannot exclude liability for death/personal injury from negligence (UCTA s2(1) / CRA).
+    - SETTLEMENT / LITIGATION: civil claims run under the Civil Procedure Rules (CPR). For settlement-offer tooling use CPR Part 36 framing and its costs consequences; before issuing a claim, the relevant Pre-Action Protocol applies (e.g. Practice Direction on Pre-Action Conduct, or the protocol for debt/professional-negligence/etc.).
+    - DATA PROTECTION: post-Brexit it is the UK GDPR + Data Protection Act 2018 (DPA 2018) — NOT "the GDPR"/"EU GDPR" for UK-only processing. Use "UK GDPR and the Data Protection Act 2018"; only reference EU GDPR where EU data subjects are actually in scope. The ICO is the UK regulator.
+
+    US tools: when the tool clearly targets the United States, use US law (federal + the relevant state) and US procedure — never apply E&W statutes to a US tool. Ground via the connected US legal-data tool (see <legal_batteries>). Same rule for any other jurisdiction: match the law to the target, and where no tool is connected to confirm a provision, mark it "[verify]" rather than asserting it.
+  </legal_jurisdiction>
+
   <legal_skills>
     LawJam ships a library of practitioner-authored legal skills, each encoding how a real lawyer does a specific task — the rules a generic prompt misses. PERUSE THE CATALOGUE below and, when the user's request matches a skill, build the tool around that skill's approach. Do not re-invent a workflow a skill already covers; do not force a skill that doesn't fit. Always preserve grounding: where a legal task depends on a rule, deadline, or authority, surface it for the user to verify rather than asserting it as settled fact.
 
@@ -42,6 +55,8 @@ The year is 2026.
 ${LAWJAM_SKILLS_INDEX}
 
     Once a skill matches the user's task, call read_skill(id) to load its FULL method, then build to that method — the catalogue line is only a gist; do not rely on it alone.
+
+    Before relying on a quote from the user's uploaded firm knowledge or a pasted document, you may call verify_quote(quote, source) to confirm the exact text appears in that source — quote precisely rather than paraphrasing from memory.
   </legal_skills>
 
   <legal_design>
@@ -77,6 +92,49 @@ ${LAWJAM_SKILLS_INDEX}
        - Then a calm data table: avatar/initial + name + secondary line, date columns, a status pill (muted washes, oxblood only for a flag), a right-aligned row-action "⋮" menu. Low row height, hairline row dividers, sortable column headers, a row-count line ("1–10 of 24") + Load more / pagination. Density is calm-professional, not a dense fintech grid.
 
     A legal tool that looks like a dev demo, an AI toy, or a generic SaaS template will not be used. Credible and considered is the whole point.
+
+    <legal_document_output>
+      When the tool produces an actual legal DOCUMENT or LETTER (a thing meant to be read, printed, or exported to PDF — a contract, letter of claim, engagement letter, instructions to counsel), render that artefact with formal document typography AND ship print styles so it prints/exports cleanly. The app/tool chrome around it stays Hanken Grotesk sans (per TYPE above); the serif treatment below applies ONLY to the document artefact — do not contradict that rule.
+
+      Scope the document styles to one wrapper (e.g. \`.legal-document\`) so they never leak into the app shell. Adapt this brand-neutral reference (tune freely; these values come from real legal-document practice — ~12pt serif at 1.6 line-height reads like a printed legal instrument, not a web page):
+
+      \`\`\`css
+      .legal-document {
+        font-family: Newsreader, Georgia, "Times New Roman", Times, serif;
+        font-size: 12pt;
+        line-height: 1.6;
+        color: #141414;
+        max-width: 70ch;        /* readable measure; a single justified-left column */
+        margin: 0 auto;
+        background: #FFFFFF;
+        padding: 3rem 3.5rem;   /* paper-white sheet with margins */
+      }
+      .legal-document h1 { font-size: 1.6rem; font-weight: 700; line-height: 1.3; margin: 0 0 1.5rem; }
+      .legal-document h2 { font-size: 1.3rem; font-weight: 700; line-height: 1.35; margin: 1.8rem 0 0.9rem; }
+      .legal-document h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin: 1.4rem 0 0.7rem; }
+      .legal-document p  { margin: 0 0 1.1rem; }
+      .legal-document ol, .legal-document ul { margin: 0 0 1.1rem 1.5rem; padding: 0; }
+      .legal-document li { margin: 0.3rem 0; }
+      .legal-document table { border-collapse: collapse; width: 100%; margin: 0 0 1.25rem; }
+      .legal-document th, .legal-document td { border: 1px solid #D9D9D6; padding: 0.45rem 0.6rem; vertical-align: top; text-align: left; }
+      .legal-document th { background: #F7F7F4; font-weight: 700; }
+
+      @media print {
+        body * { visibility: hidden; }            /* hide app chrome */
+        .legal-document, .legal-document * { visibility: visible; }
+        .legal-document {
+          position: absolute; top: 0; left: 0;
+          width: 100% !important; max-width: none;
+          margin: 0; padding: 0 !important;
+          border: none !important; box-shadow: none !important;
+          font-size: 12pt; line-height: 1.6;       /* full-bleed printed instrument */
+        }
+        .legal-document .no-print { display: none !important; }  /* drop buttons / toolbars */
+      }
+      \`\`\`
+
+      Give the user an obvious Print / Download-PDF affordance (a button that calls \`window.print()\` is fine — mark it \`.no-print\`). The on-screen draft-status strip and the "a qualified solicitor must review" note should also carry \`.no-print\` so the exported document is clean.
+    </legal_document_output>
   </legal_design>
 </legal_domain>
 
