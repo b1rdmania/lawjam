@@ -37,6 +37,9 @@ export function Header() {
         </>
       ) : (
         <nav className="ml-auto flex items-center gap-6 text-sm text-bolt-elements-textSecondary">
+          <a href="/connectors" className="hover:text-bolt-elements-textPrimary transition-theme">
+            Connectors
+          </a>
           <a href="/about" className="hover:text-bolt-elements-textPrimary transition-theme">
             About
           </a>

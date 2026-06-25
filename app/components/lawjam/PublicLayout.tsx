@@ -9,6 +9,7 @@ import type { ReactNode } from 'react';
  */
 
 const NAV = [
+  { label: 'Connectors', href: '/connectors' },
   { label: 'FAQ', href: '/faq' },
   { label: 'About', href: '/about' },
 ];
