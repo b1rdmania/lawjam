@@ -25,6 +25,13 @@ export function LawJamRail() {
         Law<span className="text-accent">Jam</span>
       </a>
 
+      <div className="mt-2 flex items-center gap-2.5 rounded-lg bg-bolt-elements-background-depth-2 px-3 py-2">
+        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-accent-700 text-white">
+          <span className="i-ph:scales text-sm" />
+        </span>
+        <span className="text-xs text-bolt-elements-textTertiary">Your workspace</span>
+      </div>
+
       <nav className="mt-4 flex flex-col gap-0.5">
         {NAV.map((n) => (
           <a
