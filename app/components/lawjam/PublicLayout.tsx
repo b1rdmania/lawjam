@@ -54,6 +54,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
           <nav className="flex flex-wrap items-center gap-6">
             <Link to="/about" className="hover:text-[#1A1A1A]">About</Link>
             <Link to="/faq" className="hover:text-[#1A1A1A]">FAQ</Link>
+            <Link to="/security" className="hover:text-[#1A1A1A]">Security</Link>
             <Link to="/signup" className="hover:text-[#1A1A1A]">Sign up</Link>
             <Link to="/" className="hover:text-[#1A1A1A]">Open the builder</Link>
           </nav>
