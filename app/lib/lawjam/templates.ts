@@ -1,77 +1,70 @@
 /**
- * LawJam templates — DESIGN templates, not legal-task ideas.
+ * LawJam design systems — the pickable gallery.
  *
- * Like Word/PowerPoint: you pick a LAYOUT (a proven, good-looking design), then
- * describe your legal content into it. This removes two kinds of blank-canvas
- * load at once — what should it look like, and how should it be structured —
- * and leaves the lawyer only the part they know: the legal content.
+ * Like bolt's pre-loaded design systems: you pick a LOOK (a coherent visual
+ * system — palette, type, component style), then describe the tool you want in
+ * chat and it's built to that look. LawJam *ships* the design systems, so every
+ * tool a lawyer builds is credible-by-default — the thing a generic builder lacks.
  *
- * Each layout maps to a Mobbin-referenced UI pattern (see DESIGN.md P1–P4) and
- * its seed prompt builds the design as a working shell, then asks what it's for.
+ * Each card shows a colour swatch so it's chosen by appearance. The seed prompt
+ * sets the design system, then asks what to build.
  */
 
-export interface LawJamTemplate {
+export interface LawJamDesignSystem {
   id: string;
   name: string;
-  tag: string; // what this design is good for
-  blurb: string; // one line on the card
-  icon: string; // iconify (phosphor) class
-  prompt: string; // seed: build the layout, then ask for the legal content
+  blurb: string;
+  swatch: string[]; // bg / ink / accent — rendered as the card's visual preview
+  prompt: string;
 }
 
-export const LAWJAM_TEMPLATES: LawJamTemplate[] = [
+export const LAWJAM_DESIGN_SYSTEMS: LawJamDesignSystem[] = [
   {
-    id: 'form',
-    name: 'Form & intake',
-    tag: 'Intake · screeners · questionnaires',
-    blurb: 'A clean sectioned form that collects answers and returns a structured result.',
-    icon: 'i-ph:clipboard-text',
+    id: 'lawjam',
+    name: 'LawJam',
+    blurb: 'Clean and modern. Near-monochrome, bold sans, one oxblood accent.',
+    swatch: ['#FFFFFF', '#141414', '#76232F'],
     prompt:
-      'Build a multi-step intake/questionnaire tool, designed to the LawJam house style: a clean sectioned form that collects answers, validates them, and produces a clear structured result or summary at the end. Use sensible placeholder questions for now — then ask me what this form is for and what questions and outcomes it should have.',
+      'Use the "LawJam" design system for everything you build: pure white background, near-black text, bold tight grotesque sans headings, a single oxblood (#76232F) accent used sparingly, soft rounded cards, generous whitespace, minimal Swiss restraint. First ask me what legal tool to build — then build it to this design system.',
   },
   {
-    id: 'document',
-    name: 'Document drafter',
-    tag: 'Letters · notices · agreements',
-    blurb: 'A form that turns inputs into a finished, properly formatted legal document.',
-    icon: 'i-ph:envelope-simple',
+    id: 'chambers',
+    name: 'Chambers',
+    blurb: 'Traditional and authoritative. Serif headings, ink and oxblood on warm paper.',
+    swatch: ['#F4EFE6', '#1B1B1A', '#6E1F2B'],
     prompt:
-      'Build a document-drafter tool, designed to the LawJam house style: a clean input form on the left and a live, properly formatted legal-document preview on the right that updates as fields are filled, with copy / print / export. Use a placeholder letter for now — then ask me what document it should draft and what fields and clauses it needs.',
+      'Use the "Chambers" design system: warm cream/paper background, deep ink text, a refined transitional serif for headings with a clean sans for body, an oxblood accent, formal and authoritative with restrained ornament — the feel of a barristers’ chambers. First ask me what legal tool to build — then build it to this design system.',
   },
   {
-    id: 'checker',
-    name: 'Document checker',
-    tag: 'Review · compliance · risk',
-    blurb: 'Paste a document, get flagged issues with severity and the rule each engages.',
-    icon: 'i-ph:file-magnifying-glass',
+    id: 'modern-firm',
+    name: 'Modern firm',
+    blurb: 'Contemporary and corporate. Clean sans, crisp white, a confident navy.',
+    swatch: ['#FFFFFF', '#0F172A', '#1E3A8A'],
     prompt:
-      'Build a document-checker tool, designed to the LawJam house style and following our results pattern: the user pastes a document; it returns a summary header with counts, then a list of flagged issues — each with a severity badge (oxblood for a flag, grey for minor), the point, and the provision it engages, expandable for detail — plus a summary banner. Use placeholder checks for now — then ask me what kind of document it checks and against what rules.',
+      'Use the "Modern firm" design system: crisp white background, slate/near-black text, a clean modern sans throughout, a confident navy (#1E3A8A) accent, generous spacing, a sharp professional legal-tech feel. First ask me what legal tool to build — then build it to this design system.',
   },
   {
-    id: 'checklist',
-    name: 'Checklist & tracker',
-    tag: 'Procedure · due diligence',
-    blurb: 'A structured checklist that works out what applies and tracks completion.',
-    icon: 'i-ph:list-checks',
+    id: 'approachable',
+    name: 'Approachable',
+    blurb: 'Warm and human, for client-facing tools. Soft palette, friendly rounded UI.',
+    swatch: ['#FBF7F2', '#2A2622', '#C2613B'],
     prompt:
-      'Build a checklist / tracker tool, designed to the LawJam house style: from a few inputs it works out which items apply, presents a structured checklist grouped by section, tracks completion, and can export the list. Use placeholder items for now — then ask me what process this checklist is for and what determines which items apply.',
+      'Use the "Approachable" design system: warm off-white background, soft charcoal text, friendly rounded components, a warm terracotta (#C2613B) accent, gentle and human — for tools a client (not a lawyer) will actually use. First ask me what legal tool to build — then build it to this design system.',
   },
   {
-    id: 'dashboard',
-    name: 'Submissions dashboard',
-    tag: 'Triage · matter tracking',
-    blurb: 'Collect entries and review them in a clean table dashboard.',
-    icon: 'i-ph:squares-four',
+    id: 'official',
+    name: 'Official',
+    blurb: 'Formal and accessible, public-sector feel. Blue, structured, high-contrast.',
+    swatch: ['#FFFFFF', '#0B0C0C', '#1D70B8'],
     prompt:
-      'Build a submissions dashboard tool, designed to the LawJam house style: a simple intake that feeds a clean dashboard — summary count cards at the top, then a filterable table of entries with status, each expandable to detail. Store entries in browser storage. Use placeholder data for now — then ask me what is being collected and how entries should be classified.',
+      'Use the "Official" design system: white background, near-black high-contrast text, a clear functional sans, a government blue (#1D70B8) accent, strong structure and accessibility (gov.uk-like), formal and trustworthy. First ask me what legal tool to build — then build it to this design system.',
   },
   {
-    id: 'comparison',
-    name: 'Comparison',
-    tag: 'Vs playbook · A / B',
-    blurb: 'Compare a document against another or a standard, and show the differences.',
-    icon: 'i-ph:rows',
+    id: 'minimal',
+    name: 'Minimal',
+    blurb: 'Swiss and stripped. Monochrome, tight type, nothing decorative.',
+    swatch: ['#FFFFFF', '#111111', '#8A8A8A'],
     prompt:
-      'Build a comparison tool, designed to the LawJam house style: two inputs (a document and a standard or playbook), a side-by-side view highlighting where they differ, each difference explained with a short position note. Use placeholder content for now — then ask me what is being compared and against what standard.',
+      'Use the "Minimal" design system: pure monochrome (white, black, greys), tight precise sans typography, a strict grid, generous whitespace and zero decoration — Swiss restraint. First ask me what legal tool to build — then build it to this design system.',
   },
 ];

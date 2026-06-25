@@ -8,7 +8,7 @@
 
 const NAV = [
   { label: 'New chat', href: '/', icon: 'i-ph:plus' },
-  { label: 'Templates', href: '/#template-gallery', icon: 'i-ph:squares-four' },
+  { label: 'Designs', href: '/#template-gallery', icon: 'i-ph:palette' },
   { label: 'Connectors', href: '/connectors', icon: 'i-ph:plugs-connected' },
 ];
 
