@@ -1,6 +1,7 @@
 import type { MetaFunction } from '@remix-run/cloudflare';
 import { useEffect, useState } from 'react';
 import { addItem, getAll, removeItem, type KnowledgeItem } from '~/lib/lawjam/knowledge';
+import type { RedactionResponse } from '~/lib/lawjam/redaction';
 
 export const meta: MetaFunction = () => [{ title: 'Knowledge — LawJam' }];
 
@@ -10,10 +11,49 @@ export default function Knowledge() {
   const [items, setItems] = useState<KnowledgeItem[] | null>(null);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
+  const [redacting, setRedacting] = useState(false);
+  const [redactNote, setRedactNote] = useState<string | null>(null);
+  const [redactError, setRedactError] = useState<string | null>(null);
 
   useEffect(() => {
     setItems(getAll());
   }, []);
+
+  const redact = async () => {
+    if (!text.trim() || redacting) {
+      return;
+    }
+
+    setRedacting(true);
+    setRedactNote(null);
+    setRedactError(null);
+
+    try {
+      const res = await fetch('/api/redact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+      });
+
+      const data = (await res.json()) as RedactionResponse;
+
+      if ('error' in data) {
+        setRedactError(data.error);
+        return;
+      }
+
+      setText(data.redacted);
+
+      const count = data.mapping.length;
+      setRedactNote(
+        count === 0 ? 'No client names or PII found.' : `${count} item${count === 1 ? '' : 's'} redacted before saving.`,
+      );
+    } catch {
+      setRedactError('Redaction could not complete. Your text was not changed.');
+    } finally {
+      setRedacting(false);
+    }
+  };
 
   const save = () => {
     if (!title.trim() || !text.trim()) {
@@ -66,11 +106,32 @@ export default function Knowledge() {
           <label className="block text-sm font-semibold mb-2">Reference text</label>
           <textarea
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e) => {
+              setText(e.target.value);
+              setRedactNote(null);
+              setRedactError(null);
+            }}
             placeholder="Paste your playbook, standard clauses, or house style…"
             rows={8}
-            className="w-full rounded-lg border border-black/10 bg-white px-4 py-3 text-sm mb-5 outline-none focus:border-accent-700 resize-y"
+            className="w-full rounded-lg border border-black/10 bg-white px-4 py-3 text-sm mb-3 outline-none focus:border-accent-700 resize-y"
           />
+
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-2">
+            <button
+              type="button"
+              onClick={redact}
+              disabled={!text.trim() || redacting}
+              className="text-sm font-medium text-accent-700 hover:text-accent disabled:opacity-40 disabled:hover:text-accent-700 transition-colors"
+            >
+              {redacting ? 'Redacting…' : 'Redact client names & PII'}
+            </button>
+            {redactNote && <span className="text-xs text-[#71717A]">{redactNote}</span>}
+            {redactError && <span className="text-xs text-[#52525B]">{redactError}</span>}
+          </div>
+          <p className="text-xs text-[#A1A1AA] mb-5">
+            Strips client names, addresses, emails and references before the text is saved or sent to the model.
+            Optional — saving without it keeps your text as-is.
+          </p>
 
           <button
             onClick={save}
