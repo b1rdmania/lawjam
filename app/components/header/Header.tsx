@@ -17,7 +17,7 @@ export function Header() {
     >
       <div className="flex items-center gap-2 z-logo text-bolt-elements-textPrimary cursor-pointer">
         <div className="i-ph:sidebar-simple-duotone text-xl" />
-        <a href="/" className="text-2xl font-bold flex items-center tracking-[-0.02em]">
+        <a href="/" className="lg:hidden text-2xl font-bold flex items-center tracking-[-0.02em]">
           <span className="text-bolt-elements-textPrimary">Law</span>
           <span className="text-accent">Jam</span>
         </a>
@@ -36,7 +36,7 @@ export function Header() {
           </ClientOnly>
         </>
       ) : (
-        <nav className="ml-auto flex items-center gap-6 text-sm text-bolt-elements-textSecondary">
+        <nav className="ml-auto flex items-center gap-6 text-sm text-bolt-elements-textSecondary lg:hidden">
           <a href="/connectors" className="hover:text-bolt-elements-textPrimary transition-theme">
             Connectors
           </a>
