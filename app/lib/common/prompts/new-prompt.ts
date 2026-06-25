@@ -45,11 +45,37 @@ ${LAWJAM_SKILLS_INDEX}
   </legal_skills>
 
   <legal_design>
-    These are tools a solicitor would put in front of a client. Build to this house style (modelled on Sana AI's calm-premium look, with legal gravitas):
-    - PALETTE: near-monochrome — warm paper/off-white background, light warm-grey cards, near-black text, muted-grey secondary. ONE accent only: oxblood #76232F (use sparingly — a key action, a flag). No red/green alarm colours; no purple; no gradients.
-    - TYPE: a serif (Newsreader, or Georgia fallback) for headings and the few brand/gravitas moments; a clean grotesque (Hanken Grotesk, system-ui fallback) for UI and body. Never Inter/Arial defaults.
-    - LAYOUT: generous whitespace, soft rounded cards (rounded-2xl ~16px, warm fill, p-5, gap-4), one prominent input, minimal/Swiss restraint. shadcn/ui patterns. Spacious beats dense; trustworthy beats flashy.
-    - RESULTS / REVIEW TOOLS (checkers, issue logs): a summary header with count cards + a thin progress bar; then issue rows, each with a small severity badge (oxblood wash for a flag, grey wash for minor) + the point + the provision it engages, expandable for detail; a summary banner when issues are found. Calm density, not an alarm panel.
+    These are tools a solicitor would put in front of a client. Build to this house style — calm-premium, near-monochrome, considered. It is modelled on real professional product UI (Mercury, Notion, Squarespace docs, Vanta), NOT on generic AI-app or dev-demo aesthetics. Use shadcn/ui primitives. Invent nothing about the look — follow the values below.
+
+    PALETTE (fixed — do not improvise):
+    - Background pure white #FFFFFF; cards/panels warm light-grey #F4F4F3, radius 16px (rounded-2xl), padding p-5, gaps gap-4.
+    - Text near-black #141414; secondary muted grey #6B6B6B; hairline borders #E7E6E4 (border + divide).
+    - ONE accent only: oxblood #76232F, used sparingly — a single primary action, a flag/severity wash, a small mark. Primary buttons are BLACK #141414 (not oxblood); oxblood is the exception, not the default fill.
+    - NO red/green alarm colours, NO purple, NO gradients, NO drop-shadow-heavy cards. Status uses a calm wash, not a stoplight.
+
+    TYPE (this resolves the one rule people get wrong):
+    - UI, body, labels, tables, buttons, form fields, dashboards → Hanken Grotesk (system-ui fallback). This matches the LawJam app shell. Headings in app-chrome UI are Hanken Grotesk too — bold, tight (font-bold, tracking -0.02em). Do NOT set app/tool chrome in a serif.
+    - The ONE place serif belongs: inside a GENERATED LEGAL DOCUMENT or LETTER preview — the document's own title and section headings (Parties, Background, Operative Clauses, Yours faithfully) may use Newsreader (Georgia fallback), because a letter should read like a letter, not an app screen. Body of the document is still Hanken Grotesk or Newsreader at a readable measure (~65ch), justified-left. So: serif = the document artefact; sans = everything around it. Never Inter/Arial defaults anywhere.
+
+    THE FOUR THINGS LAWJAM GENERATES — build each to its reference pattern:
+
+    1. CLIENT-INTAKE / ONBOARDING FORM (ref: Mercury, Gusto). Multi-step.
+       - Left vertical step rail (~200px): numbered "Step 2 of 5" + named steps with a tick on completed ones, current step highlighted. On narrow screens, collapse to a thin top progress bar.
+       - One centred column of fields, max-width ~560px. Section title in medium weight; fields stacked, generous (label 13–14px above input, input h-10, full-width, rounded-lg, hairline border, p-3); helper text muted below where a legal field needs explaining (e.g. "as it appears on your passport"). Mark required with a small oxblood asterisk.
+       - Footer with Back (ghost) + Continue (black). Calm, never cramped — this is a client filling it in.
+
+    2. GENERATED DOCUMENT / LETTER PREVIEW (ref: Squarespace contract, Notion doc properties). The output looks like a real legal document on a page.
+       - A document title (serif, large) + one muted line of purpose. Below it a metadata block — Parties / Reference / Date / "Prepared by", as a clean label→value list (Notion-property style: muted label left, value right, hairline dividers) OR a right-hand Details panel.
+       - The body sits on a paper-white sheet with comfortable margins; section headings (serif) separate Parties, Background/Recitals, Operative provisions, etc. A thin status strip ("Draft — awaiting review", oxblood dot) and the assistive-tool note ("a qualified solicitor must review before this is sent/signed"). Where a clause cites law, show the real grounded provision or a clear "[verify]" marker — never a fabricated citation.
+
+    3. DOCUMENT-REVIEW RESULTS / ISSUES LIST (ref: Vanta, Surfshark, Grammarly).
+       - Summary header: 3–4 count cards (e.g. Clauses checked · Issues found · To verify) each with a thin progress bar; a one-line summary banner above the list when issues exist (calm, not alarm).
+       - Issue rows: py-3, border-b, expandable. Each row = a small severity badge (flag = oxblood wash bg + oxblood text pill; minor = grey wash — NOT red/green) + the issue title + the provision/clause it engages; expand for detail and suggested fix. A filter/search row above the list. Optional split view: document left, categorised issues right (Grammarly) for annotation tools.
+
+    4. SUBMISSIONS / REVIEW DASHBOARD (ref: Fresha, Maze, Navattic). A solicitor triaging what's come in.
+       - Top: 3–4 status count cards (Sent · Completed · To complete · Flagged), each number large with a thin progress bar beneath. Optional details panel summarising the matter/form.
+       - Then a calm data table: avatar/initial + name + secondary line, date columns, a status pill (muted washes, oxblood only for a flag), a right-aligned row-action "⋮" menu. Low row height, hairline row dividers, sortable column headers, a row-count line ("1–10 of 24") + Load more / pagination. Density is calm-professional, not a dense fintech grid.
+
     A legal tool that looks like a dev demo, an AI toy, or a generic SaaS template will not be used. Credible and considered is the whole point.
   </legal_design>
 </legal_domain>
