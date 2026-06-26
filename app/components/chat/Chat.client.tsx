@@ -324,10 +324,26 @@ export const ChatImpl = memo(
         return;
       }
 
-      await Promise.all([
-        animate('#examples', { opacity: 0, display: 'none' }, { duration: 0.1 }),
-        animate('#intro', { opacity: 0, flex: 1 }, { duration: 0.2, ease: cubicEasingFn }),
-      ]);
+      // These targets only exist on the pre-chat intro layout. LawJam's custom home
+      // replaced bolt's `#examples` block with the design-system gallery, so that
+      // selector no longer resolves — and framer-motion's animate() THROWS
+      // ("No valid elements provided") on a missing element. That rejection used to
+      // abort this function before setChatStarted(true) ran, leaving the page stuck on
+      // the hero with a permanent "Generating Response" and no conversation/preview. Guard each
+      // target and never let a missing element block the chat-start transition.
+      try {
+        const transitions = [
+          typeof document !== 'undefined' && document.querySelector('#examples')
+            ? animate('#examples', { opacity: 0, display: 'none' }, { duration: 0.1 })
+            : null,
+          typeof document !== 'undefined' && document.querySelector('#intro')
+            ? animate('#intro', { opacity: 0, flex: 1 }, { duration: 0.2, ease: cubicEasingFn })
+            : null,
+        ].filter(Boolean);
+        await Promise.all(transitions);
+      } catch (error) {
+        console.warn('runAnimation: intro transition skipped', error);
+      }
 
       chatStore.setKey('started', true);
 
