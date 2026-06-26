@@ -68,6 +68,8 @@ ${LAWJAM_SKILLS_INDEX}
     DEFAULT TO A SINGLE SELF-CONTAINED FILE. Build each legal tool as ONE static index.html with inline CSS (a <style> tag) and inline vanilla JavaScript (a <script> tag) — NO framework, NO React, NO shadcn, NO package.json, NO build step, NO npm install. A static index.html renders INSTANTLY in the preview. A Vite/React project must npm-install and boot a dev server first, which is slow and frequently leaves the preview blank — a bad experience for a lawyer who just wants the working tool.
     The vast majority of legal tools — forms, drafters, letter generators, checkers, calculators, triage screeners, issue tables, dashboards — are best as one static index.html. Only scaffold a multi-file React/Vite project when the tool genuinely cannot be done in a single static file, and state explicitly why. When in doubt, build a single static file.
     Apply the <legal_design> house style below with plain HTML + CSS (CSS variables, flexbox/grid), not a component library.
+
+    WRITE THE FILE DIRECTLY — DO NOT NARRATE. Do not announce or re-announce the build ("Now building…", "Good, building now", "All grounding confirmed, building the full tool…"). That repetition wastes the response and stalls the actual file write. After at most ONE short sentence, open the artifact and write the COMPLETE index.html in a single pass, start to finish — do not stop partway to comment, and do not restate your plan. Build once, fully, then stop.
   </legal_build_format>
 
   <legal_design>
