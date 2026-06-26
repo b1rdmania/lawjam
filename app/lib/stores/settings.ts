@@ -282,7 +282,14 @@ const getInitialSettings = () => {
 
   return {
     latestBranch: getStoredBoolean(SETTINGS_KEYS.LATEST_BRANCH, false),
-    autoSelectTemplate: getStoredBoolean(SETTINGS_KEYS.AUTO_SELECT_TEMPLATE, true),
+    // LawJam: NEVER auto-scaffold a Vite/React starter template. Legal tools are
+    // single static index.html files that render instantly in the preview. The
+    // auto-template was the root cause of the "stalled / blank preview" — it
+    // created a Vite project on every build that needed npm-install before
+    // anything showed, and fought the single-file build instruction. Hardcoded
+    // false (not getStoredBoolean) so it also overrides any cached `true` in a
+    // user's localStorage from before this change.
+    autoSelectTemplate: false,
     contextOptimization: getStoredBoolean(SETTINGS_KEYS.CONTEXT_OPTIMIZATION, true),
     eventLogs: getStoredBoolean(SETTINGS_KEYS.EVENT_LOGS, true),
     promptId: isBrowser ? localStorage.getItem(SETTINGS_KEYS.PROMPT_ID) || 'default' : 'default',
