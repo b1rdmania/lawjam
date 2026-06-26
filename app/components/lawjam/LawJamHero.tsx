@@ -126,12 +126,32 @@ export function LawJamHero({ visible, onPick, onDismiss }: LawJamHeroProps) {
       className="fixed inset-0 z-[60] overflow-hidden"
       style={{ background: INK, color: PAPER, fontFamily: '"Hanken Grotesk", sans-serif' }}
     >
-      {/* faint oxblood vignette top-right + soft glow bottom-left — restrained, no gimmick */}
+      {/* faint oxblood vignette top-right + soft glow bottom-left + a cool rim-light
+          behind the robot so its near-black silhouette separates from the bg */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(120% 90% at 78% 12%, rgba(118,35,47,0.20) 0%, rgba(118,35,47,0) 55%), radial-gradient(100% 80% at 10% 100%, rgba(245,243,238,0.05) 0%, rgba(245,243,238,0) 50%)',
+            'radial-gradient(120% 90% at 80% 16%, rgba(118,35,47,0.22) 0%, rgba(118,35,47,0) 52%), radial-gradient(55% 70% at 80% 58%, rgba(245,243,238,0.06) 0%, rgba(245,243,238,0) 60%), radial-gradient(100% 80% at 10% 100%, rgba(245,243,238,0.05) 0%, rgba(245,243,238,0) 50%)',
+        }}
+      />
+
+      {/* Robot — a shadowy suited figure with glowing red eyes on the right.
+          Its body is near-black so it reads as a presence in the dark, not a cutout.
+          Left edge masked to fade into the hero; hidden on mobile to never crowd the text. */}
+      <img
+        src="/lawjam-robot.png"
+        alt=""
+        aria-hidden="true"
+        className="hidden md:block absolute bottom-0 right-0 z-0 pointer-events-none select-none"
+        style={{
+          height: '96%',
+          width: 'auto',
+          objectFit: 'contain',
+          objectPosition: 'bottom right',
+          opacity: 0.95,
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.35) 24%, #000 58%)',
+          maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.35) 24%, #000 58%)',
         }}
       />
 
