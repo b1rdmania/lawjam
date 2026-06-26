@@ -16,6 +16,7 @@ import * as Tooltip from '@radix-ui/react-tooltip';
 import styles from './BaseChat.module.scss';
 import { ImportButtons } from '~/components/chat/chatExportAndImport/ImportButtons';
 import { TemplateGallery } from '~/components/chat/TemplateGallery';
+import { LawJamHero } from '~/components/lawjam/LawJamHero';
 import GitCloneButton from './GitCloneButton';
 import type { ProviderInfo } from '~/types/model';
 import type { ActionAlert, SupabaseAlert, DeployAlert, LlmErrorAlertType } from '~/types/actions';
@@ -145,6 +146,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
     const [progressAnnotations, setProgressAnnotations] = useState<ProgressAnnotation[]>([]);
     const expoUrl = useStore(expoUrlAtom);
     const [qrModalOpen, setQrModalOpen] = useState(false);
+    const [heroVisible, setHeroVisible] = useState(true);
 
     useEffect(() => {
       if (expoUrl) {
@@ -349,6 +351,13 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
         <ClientOnly>{() => <Menu />}</ClientOnly>
         <div className="flex flex-col lg:flex-row overflow-y-auto w-full h-full">
           <div className={classNames(styles.Chat, 'flex flex-col flex-grow lg:min-w-[var(--chat-min-width)] h-full')}>
+            {!chatStarted && (
+              <LawJamHero
+                visible={heroVisible}
+                onPick={(p) => handleSendMessage?.({} as any, p)}
+                onDismiss={() => setHeroVisible(false)}
+              />
+            )}
             {!chatStarted && (
               <div id="intro" className="mt-[16vh] max-w-2xl mx-auto text-center px-4 lg:px-0">
                 <h1 className="text-3xl lg:text-5xl font-bold tracking-[-0.02em] text-bolt-elements-textPrimary mb-4 animate-fade-in">
